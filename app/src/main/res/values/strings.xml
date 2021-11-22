@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Test1</string>
+    <string name="title">Заголовок</string>
+    <string name="message">Введите текст</string>
+    <string name="button">Сохранить</string>
+    <string name="msgerror">Заполните пустое поле</string>
+    <string name="nomsg">Введите данные.Error</string>
+    <string name="sucsess_msg">Сохранено</string>
+
 </resources>

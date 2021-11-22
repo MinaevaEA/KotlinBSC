@@ -13,24 +13,22 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Заголовок"
-            tools:ignore="MissingConstraints" />
+            android:text="@string/title"
+             />
         <EditText
             android:id="@+id/message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Текст"
-            tools:ignore="MissingConstraints"
+            android:text="@string/message"
             android:layout_below='@id/title'
             />
         <Button
             android:id="@+id/button"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Сохранить"
+            android:text="@string/button"
             android:layout_below='@id/message'
-            tools:ignore="MissingConstraints"
-             />
+            />
     </RelativeLayout>
 
 </LinearLayout>

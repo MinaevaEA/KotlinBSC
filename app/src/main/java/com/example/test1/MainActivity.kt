@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity(), MainUi {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -22,11 +23,24 @@ class MainActivity : AppCompatActivity(), MainUi {
             }
     }
 
-    override fun showNotification(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT)
+    override fun onSaveSuccsess() {
+        showNotification(getString(R.string.sucsess_msg))
+    }
+
+    override fun onSaveFailed() {
+        showNotification(getString(R.string.msgerror))
+    }
+
+    override fun textNull() {
+        showNotification(getString(R.string.nomsg))
+    }
+
+    private fun showNotification(text : String) {
+        Toast.makeText(this, text, Toast.LENGTH_SHORT)
             .apply {
                 setGravity(Gravity.TOP, 0, 250)
                 show()
-            }
+    }
+
     }
 }
