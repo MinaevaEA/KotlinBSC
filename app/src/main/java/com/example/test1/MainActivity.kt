@@ -35,12 +35,12 @@ class MainActivity : AppCompatActivity(), MainUi {
         showNotification(getString(R.string.nomsg))
     }
 
-    private fun showNotification(text : String) {
+    private fun showNotification(text: String) {
         Toast.makeText(this, text, Toast.LENGTH_SHORT)
             .apply {
                 setGravity(Gravity.TOP, 0, 250)
                 show()
-    }
+            }
 
     }
 }
