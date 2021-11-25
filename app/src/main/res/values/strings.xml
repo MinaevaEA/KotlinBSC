@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Test1</string>
+
+    <string name="title">Заголовок</string>
+    <string name="message">Введите текст</string>
+    <string name="button">Toast</string>
+    <string name="button1">Activity</string>
+    <string name="button2">Отправить</string>
+    <string name="msgerror">Заполните пустое поле</string>
+    <string name="text">Здесь будут выведены данные всех заметок,</string>
+    <string name="text2">когда будет реализована БД</string>
+    <string name="sucsess_msg">Сохранено</string>
+
+
 </resources>

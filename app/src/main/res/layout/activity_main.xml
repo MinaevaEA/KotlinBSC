@@ -5,32 +5,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="horizontal">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
+    android:orientation="vertical">
+
+    <EditText
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Заголовок"
-            tools:ignore="MissingConstraints" />
-        <EditText
+            android:text="@string/title"
+             />
+    <EditText
             android:id="@+id/message"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Текст"
-            tools:ignore="MissingConstraints"
+            android:text="@string/message"
             android:layout_below='@id/title'
             />
-        <Button
+    <Button
             android:id="@+id/button"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
-            android:text="Сохранить"
+            android:text="@string/button"
             android:layout_below='@id/message'
-            tools:ignore="MissingConstraints"
-             />
-    </RelativeLayout>
-
+        />
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/button1"
+        />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/button2"
+        android:layout_below='@id/button1' />
 </LinearLayout>

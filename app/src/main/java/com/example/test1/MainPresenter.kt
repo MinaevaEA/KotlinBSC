@@ -2,12 +2,10 @@ package com.example.test1
 
 class MainPresenter(private val mainUi: MainUi) {
     fun onNewTodo(title: String, message: String) {
-        val result = if (title.isEmpty() && message.isEmpty()) {
-            "Введите данные"
+        if (title.isEmpty() && message.isEmpty()) {
+            mainUi.onSaveFailed()
         } else {
-            "Сохранено"
+            mainUi.onSaveSuccsess()
         }
-
-        mainUi.showNotification(result)
     }
 }
