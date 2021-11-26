@@ -13,29 +13,26 @@ import android.widget.Toast
 
 
 class MainActivity : AppCompatActivity(), MainUi {
+
+     lateinit var title :EditText
+     lateinit var message: EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
+        title = findViewById(R.id.title)
+        message = findViewById(R.id.message)
         val presenter = MainPresenter(this)
-        findViewById<Button>(R.id.button)
+        findViewById<Button>(R.id.buttonToast)
             .setOnClickListener {
-                presenter.onNewTodo(
-                    findViewById<EditText>(R.id.title).text.toString(),
-                    findViewById<EditText>(R.id.message).text.toString()
-
-                )
+                presenter.onNewTodo(title.text.toString(),message.text.toString())
             }
-        findViewById<Button>(R.id.button1)
+        findViewById<Button>(R.id.buttonActivity)
             .setOnClickListener {
-                startIntent()
+                presenter.activityBtnClick()
             }
-        findViewById<Button>(R.id.button2)
+        findViewById<Button>(R.id.buttonShare)
             .setOnClickListener {
-                shareNote(
-                    findViewById<EditText>(R.id.title).text.toString(),
-                    findViewById<EditText>(R.id.message).text.toString()
+                presenter.shareBtnClick(title.text.toString(),message.text.toString()
                 )
             }
 
@@ -59,12 +56,12 @@ class MainActivity : AppCompatActivity(), MainUi {
 
     }
 
-    private fun startIntent() {
-        val intent = Intent(this, DataActivity::class.java)
+     override fun startIntent() {
+       val intent = Intent(this, DataActivity::class.java)
         startActivity(intent)
     }
 
-    private fun shareNote(title: String, message: String) {
+    override fun shareNote(title: String, message: String) {
         val shareIntent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
             putExtra(Intent.EXTRA_TEXT, "$title/$message")
@@ -74,6 +71,7 @@ class MainActivity : AppCompatActivity(), MainUi {
 
     }
 }
+
 
 //private fun broser(){
 //    val browseIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"))

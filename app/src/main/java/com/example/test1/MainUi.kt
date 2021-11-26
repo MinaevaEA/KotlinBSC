@@ -7,6 +7,8 @@ interface MainUi {
     fun onSaveSuccsess()
 
     fun onSaveFailed()
+    fun shareNote(title: String, message: String)
+    fun startIntent()
 
 
 }
