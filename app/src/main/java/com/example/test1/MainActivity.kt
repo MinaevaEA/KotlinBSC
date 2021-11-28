@@ -14,31 +14,37 @@ import android.widget.Toast
 
 class MainActivity : AppCompatActivity(), MainUi {
 
-     lateinit var title :EditText
-     lateinit var message: EditText
+    lateinit var title: EditText
+    lateinit var message: EditText
+    lateinit var btnToast: Button
+    lateinit var btnActivity: Button
+    lateinit var btnShare: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         title = findViewById(R.id.title)
         message = findViewById(R.id.message)
+        btnToast = findViewById(R.id.buttonToast)
+        btnActivity = findViewById(R.id.buttonActivity)
+        btnShare = findViewById(R.id.buttonShare)
         val presenter = MainPresenter(this)
-        findViewById<Button>(R.id.buttonToast)
-            .setOnClickListener {
-                presenter.onNewTodo(title.text.toString(),message.text.toString())
-            }
-        findViewById<Button>(R.id.buttonActivity)
-            .setOnClickListener {
-                presenter.activityBtnClick()
-            }
-        findViewById<Button>(R.id.buttonShare)
-            .setOnClickListener {
-                presenter.shareBtnClick(title.text.toString(),message.text.toString()
-                )
-            }
+
+        btnToast.setOnClickListener {
+            presenter.onNewTodo(title.text.toString(), message.text.toString())
+        }
+        btnActivity.setOnClickListener {
+            presenter.activityBtnClick()
+        }
+        btnShare.setOnClickListener {
+            presenter.shareBtnClick(
+                title.text.toString(), message.text.toString()
+            )
+        }
 
     }
 
-      override fun onSaveSuccsess() {
+    override fun onSaveSuccsess() {
         showNotification(getString(R.string.sucsess_msg))
     }
 
@@ -56,8 +62,8 @@ class MainActivity : AppCompatActivity(), MainUi {
 
     }
 
-     override fun startIntent() {
-       val intent = Intent(this, DataActivity::class.java)
+    override fun startIntent() {
+        val intent = Intent(this, DataActivity::class.java)
         startActivity(intent)
     }
 
