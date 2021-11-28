@@ -12,7 +12,9 @@
         android:layout_height="wrap_content"
         android:hint="@string/title"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill,TextFields"
+         />
 
     <EditText
         android:id="@+id/message"
@@ -20,7 +22,8 @@
         android:layout_height="wrap_content"
         android:hint="@string/message"
         app:layout_constraintLeft_toLeftOf="@id/title"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:ignore="Autofill,TextFields" />
 
     <Button
         android:id="@+id/buttonToast"

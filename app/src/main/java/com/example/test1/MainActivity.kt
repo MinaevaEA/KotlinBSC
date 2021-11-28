@@ -11,11 +11,11 @@ import android.widget.Toast
 
 class MainActivity : AppCompatActivity(), MainUi {
 
-    lateinit var title: EditText
-    lateinit var message: EditText
-    lateinit var btnToast: Button
-    lateinit var btnActivity: Button
-    lateinit var btnShare: Button
+    private lateinit var title: EditText
+    private lateinit var message: EditText
+    private lateinit var btnToast: Button
+    private lateinit var btnActivity: Button
+    private lateinit var btnShare: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,11 +75,6 @@ class MainActivity : AppCompatActivity(), MainUi {
     }
 }
 
-
-//private fun broser(){
-//    val browseIntent = Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"))
-//    startActivity(browseIntent)
-//}
 
 
 
