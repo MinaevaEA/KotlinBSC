@@ -1,5 +1,6 @@
 package com.example.test1
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
@@ -7,26 +8,79 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 
+
 class MainActivity : AppCompatActivity(), MainUi {
+
+    private lateinit var title: EditText
+    private lateinit var message: EditText
+    private lateinit var btnToast: Button
+    private lateinit var btnActivity: Button
+    private lateinit var btnShare: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        title = findViewById(R.id.title)
+        message = findViewById(R.id.message)
+        btnToast = findViewById(R.id.buttonToast)
+        btnActivity = findViewById(R.id.buttonActivity)
+        btnShare = findViewById(R.id.buttonShare)
         val presenter = MainPresenter(this)
-        findViewById<Button>(R.id.button)
-            .setOnClickListener {
-                presenter.onNewTodo(
-                    findViewById<EditText>(R.id.title).text.toString(),
-                    findViewById<EditText>(R.id.message).text.toString()
-                )
-            }
+
+        btnToast.setOnClickListener {
+            presenter.onNewTodo(title.text.toString(), message.text.toString())
+        }
+        btnActivity.setOnClickListener {
+            presenter.activityBtnClick()
+        }
+        btnShare.setOnClickListener {
+            presenter.shareBtnClick(
+                title.text.toString(), message.text.toString()
+            )
+        }
+
+    }
+
+    override fun onSaveSuccess() {
+        showNotification(getString(R.string.save_msg))
+    }
+
+    override fun onSaveFailed() {
+        showNotification(getString(R.string.msg_error))
     }
 
     override fun showNotification(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT)
+
             .apply {
                 setGravity(Gravity.TOP, 0, 250)
                 show()
             }
+
+    }
+
+    override fun startIntent() {
+        val intent = Intent(this, DataActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun shareNote(title: String, message: String) {
+        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+            type = "text/plain"
+            putExtra(Intent.EXTRA_TEXT, "$title/$message")
+
+        }
+        startActivity(shareIntent)
+
     }
 }
+
+
+
+
+
+
+
+
+
+

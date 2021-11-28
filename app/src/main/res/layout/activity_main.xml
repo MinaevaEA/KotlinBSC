@@ -1,36 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:orientation="horizontal">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Заголовок"
-            tools:ignore="MissingConstraints" />
-        <EditText
-            android:id="@+id/message"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Текст"
-            tools:ignore="MissingConstraints"
-            android:layout_below='@id/title'
-            />
-        <Button
-            android:id="@+id/button"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:text="Сохранить"
-            android:layout_below='@id/message'
-            tools:ignore="MissingConstraints"
-             />
-    </RelativeLayout>
+    tools:context=".MainActivity">
 
-</LinearLayout>
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/title"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="Autofill,TextFields"
+         />
+
+    <EditText
+        android:id="@+id/message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/message"
+        app:layout_constraintLeft_toLeftOf="@id/title"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        tools:ignore="Autofill,TextFields" />
+
+    <Button
+        android:id="@+id/buttonToast"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonToast"
+        app:layout_constraintLeft_toLeftOf="@id/message"
+        app:layout_constraintTop_toBottomOf="@id/message" />
+
+    <Button
+        android:id="@+id/buttonActivity"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonActivity"
+        app:layout_constraintLeft_toLeftOf="@id/buttonToast"
+        app:layout_constraintTop_toBottomOf="@id/buttonToast" />
+
+    <Button
+        android:id="@+id/buttonShare"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonShare"
+        app:layout_constraintLeft_toLeftOf="@id/buttonActivity"
+        app:layout_constraintTop_toBottomOf="@id/buttonActivity" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

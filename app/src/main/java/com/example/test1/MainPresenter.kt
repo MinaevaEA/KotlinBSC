@@ -2,12 +2,25 @@ package com.example.test1
 
 class MainPresenter(private val mainUi: MainUi) {
     fun onNewTodo(title: String, message: String) {
-        val result = if (title.isEmpty() && message.isEmpty()) {
-            "Введите данные"
+        if (title.isEmpty() && message.isEmpty()) {
+            mainUi.onSaveFailed()
         } else {
-            "Сохранено"
+            mainUi.onSaveSuccess()
         }
-
-        mainUi.showNotification(result)
     }
+
+    fun shareBtnClick(title: String, message: String){
+        if(message.isEmpty()){
+            mainUi.onSaveFailed()
+        }else{
+            mainUi.shareNote(title,message)
+        }
+    }
+    fun activityBtnClick(){
+        mainUi.startIntent()
+
+    }
+
+
+
 }
