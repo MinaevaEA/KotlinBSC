@@ -8,7 +8,7 @@ class MainPresenter(private val mainUi: MainUi) {
         if (title.isEmpty() && message.isEmpty()) {
             mainUi.onSaveFailed()
         } else {
-            mainUi.onSaveSuccsess()
+            mainUi.onSaveSuccess()
         }
     }
 

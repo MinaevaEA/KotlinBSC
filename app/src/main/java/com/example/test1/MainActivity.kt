@@ -44,12 +44,12 @@ class MainActivity : AppCompatActivity(), MainUi {
 
     }
 
-    override fun onSaveSuccsess() {
-        showNotification(getString(R.string.sucsess_msg))
+    override fun onSaveSuccess() {
+        showNotification(getString(R.string.save_msg))
     }
 
     override fun onSaveFailed() {
-        showNotification(getString(R.string.msgerror))
+        showNotification(getString(R.string.msg_error))
     }
 
     override fun showNotification(text: String) {

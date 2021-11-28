@@ -6,10 +6,10 @@
     <string name="buttonToast">Toast</string>
     <string name="buttonActivity">Activity</string>
     <string name="buttonShare">Отправить</string>
-    <string name="msgerror">Заполните пустое поле</string>
+    <string name="msg_error">Заполните пустое поле</string>
     <string name="text">Здесь будут выведены данные всех заметок,</string>
     <string name="text2">когда будет реализована БД</string>
-    <string name="sucsess_msg">Сохранено</string>
+    <string name="save_msg">Сохранено</string>
 
 
 </resources>
