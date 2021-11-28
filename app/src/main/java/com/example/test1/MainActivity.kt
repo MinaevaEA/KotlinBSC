@@ -1,11 +1,8 @@
 package com.example.test1
 
 import android.content.Intent
-import android.icu.text.CaseMap
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Message
 import android.view.Gravity
 import android.widget.Button
 import android.widget.EditText
@@ -52,8 +49,8 @@ class MainActivity : AppCompatActivity(), MainUi {
         showNotification(getString(R.string.msg_error))
     }
 
-    override fun showNotification(text: String) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT)
+    override fun showNotification(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT)
 
             .apply {
                 setGravity(Gravity.TOP, 0, 250)
