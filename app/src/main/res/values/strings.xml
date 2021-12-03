@@ -7,8 +7,8 @@
     <string name="buttonActivity">Activity</string>
     <string name="buttonShare">Отправить</string>
     <string name="msg_error">Заполните пустое поле</string>
-    <string name="text">Здесь будут выведены данные всех заметок,</string>
-    <string name="text2">когда будет реализована БД</string>
+    <string name="text">Заголовок списка,</string>
+    <string name="text2">Тело списка</string>
     <string name="save_msg">Сохранено</string>
 
 

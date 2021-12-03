@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity(), MainUi {
         btnToast = findViewById(R.id.buttonToast)
         btnActivity = findViewById(R.id.buttonActivity)
         btnShare = findViewById(R.id.buttonShare)
+
         val presenter = MainPresenter(this)
 
         btnToast.setOnClickListener {
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity(), MainUi {
         }
 
     }
+
 
     override fun onSaveSuccess() {
         showNotification(getString(R.string.save_msg))
