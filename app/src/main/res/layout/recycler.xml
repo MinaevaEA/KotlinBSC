@@ -8,5 +8,6 @@
         android:id="@+id/recyclerView"
         android:layout_height="match_parent"
          android:layout_width="match_parent"
-        tools:listitem="@layout/list_item"/>
+        tools:listitem="@layout/list_item"
+        tools:itemCount="10"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 
 
-class CustomRecyclerAdapter(private var list:List<NoteData>) :
+class CustomRecyclerAdapter(private var notes:List<NoteData>) :
    RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) :
@@ -17,7 +17,6 @@ class CustomRecyclerAdapter(private var list:List<NoteData>) :
 
         private val title: TextView = itemView.findViewById(R.id.title)
         private val subtitle: TextView = itemView.findViewById(R.id.message)
-
 
         fun bind(data: NoteData) {
             title.text = data.title
@@ -30,15 +29,15 @@ class CustomRecyclerAdapter(private var list:List<NoteData>) :
         val itemView =
             LayoutInflater
                 .from(parent.context)
-                .inflate(R.layout.list_item, parent, false)
+                .inflate(R.layout.list_item, parent, false) //ok
         return MyViewHolder(itemView)
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(notes[position])
     }
 
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = notes.size
 
 
 }
