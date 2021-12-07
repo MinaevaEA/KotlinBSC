@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Test1"
         android:fullBackupContent="true">
-        <activity android:name=".DataActivity">
+        <activity android:name=".AboutActivity">
         </activity>
 
         <activity

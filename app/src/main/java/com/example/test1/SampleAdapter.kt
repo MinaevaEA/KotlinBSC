@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 
 
-
 class CustomRecyclerAdapter(private var notes:List<NoteData>) :
    RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
 
@@ -27,7 +26,7 @@ class CustomRecyclerAdapter(private var notes:List<NoteData>) :
             itemView.setOnClickListener(object :View.OnClickListener{
                 override fun onClick(v:View){
                     val activity=v.context as AppCompatActivity
-                    val newFragment = NewFragment.newInstance(data.title, data.subtitle)
+                    val newFragment = SecondFragment.newInstance(data.title, data.subtitle)
                     activity.supportFragmentManager.beginTransaction().replace(R.id.fragment_container,newFragment).commit()
                 }
             })

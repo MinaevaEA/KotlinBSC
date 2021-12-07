@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    tools:context=".SecondFragment">
 
-    tools:context=".NewFragment">
     <EditText
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/title"
         tools:ignore="Autofill,TextFields"
+        android:layout_marginTop="50dp"
         />
 
     <EditText
@@ -25,6 +26,11 @@
         android:id="@+id/buttonToast"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/buttonToast"
+        android:text="@string/buttonSave"/>
+    <Button
+        android:id="@+id/buttonShare"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonShare"
       />
 </LinearLayout>

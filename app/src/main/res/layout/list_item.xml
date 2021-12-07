@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="110dp"
     android:orientation="vertical"
     >
 
@@ -9,8 +9,9 @@
         android:id="@+id/title"
         android:layout_width="401dp"
         android:layout_height="26dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="60dp"
         android:text="@string/text"
+
          />
 
     <TextView

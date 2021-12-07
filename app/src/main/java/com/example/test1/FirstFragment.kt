@@ -1,12 +1,15 @@
 package com.example.test1
 
 
+import android.content.Intent
 import android.os.Bundle
-import android.os.Parcelable
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
+import android.widget.Button
+
+
 
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,10 +19,10 @@ import androidx.recyclerview.widget.RecyclerView
 data class NoteData(var title: String, var subtitle: String)
 
 
-class NoteFragment: Fragment() {
+class FirstFragment: Fragment() , FirstMainUi {
  private lateinit var noteFragment: RecyclerView
  private lateinit var adapter: CustomRecyclerAdapter
-
+    private lateinit var btnAbout: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +37,14 @@ class NoteFragment: Fragment() {
         return view
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        btnAbout = view.findViewById(R.id.about)
+        val presenter = FirstPresenter(this)
+        btnAbout.setOnClickListener {
+            presenter.activityBtnClick()
+        }
+    }
 
      private  var notes = mutableListOf<NoteData>()
     init {
@@ -43,6 +54,10 @@ class NoteFragment: Fragment() {
             note.subtitle = "Текст #$i"
             notes += note
         }
+    }
+    override fun startIntent() {
+        val intent = Intent(requireContext(), AboutActivity::class.java)
+          startActivity(intent)
     }
 
 

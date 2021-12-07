@@ -3,15 +3,14 @@
 
     <string name="title">Заголовок</string>
     <string name="message">Введите текст</string>
-    <string name="buttonToast">Toast</string>
+    <string name="buttonSave">Check</string>
     <string name="buttonActivity">Activity</string>
     <string name="buttonShare">Отправить</string>
     <string name="msg_error">Заполните пустое поле</string>
     <string name="text">Заголовок списка,</string>
     <string name="text2">Тело списка</string>
     <string name="save_msg">Сохранено</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_about">About</string>
 
 
 </resources>
