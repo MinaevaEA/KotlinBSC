@@ -1,16 +1,20 @@
 package com.example.test1
 
+
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
-data class NoteData(var title: String, var subtitle: String) {
 
-}
+data class NoteData(var title: String, var subtitle: String)
+
 
 class NoteFragment: Fragment() {
  private lateinit var noteFragment: RecyclerView
@@ -31,7 +35,7 @@ class NoteFragment: Fragment() {
     }
 
 
-       var notes = mutableListOf<NoteData>()
+     private  var notes = mutableListOf<NoteData>()
     init {
         for (i in 0 until 100) {
             val note = NoteData(title = String(), subtitle = String())
@@ -40,6 +44,7 @@ class NoteFragment: Fragment() {
             notes += note
         }
     }
+
 
 
 }

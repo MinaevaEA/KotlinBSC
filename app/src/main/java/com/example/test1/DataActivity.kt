@@ -12,7 +12,8 @@ class DataActivity : AppCompatActivity() {
         setContentView(R.layout.fragment_activity)
          supportFragmentManager.beginTransaction().replace(R.id.fragment_container,NoteFragment()).commit()
 
-        }
+
+    }
 
 
         }
