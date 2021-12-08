@@ -16,7 +16,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 
 
-class SecondFragment : Fragment(), SecondFragmentUI {
+class SecondFragment : Fragment(), SecondFragmentView {
     private lateinit var title: EditText
     private lateinit var message: EditText
     private lateinit var btnToast: Button
@@ -91,7 +91,5 @@ class SecondFragment : Fragment(), SecondFragmentUI {
 
         }
         startActivity(shareIntent)
-
-
     }
 }

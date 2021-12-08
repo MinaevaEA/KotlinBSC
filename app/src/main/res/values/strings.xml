@@ -3,7 +3,7 @@
 
     <string name="title">Заголовок</string>
     <string name="message">Введите текст</string>
-    <string name="buttonSave">Check</string>
+    <string name="buttonSave">Save</string>
     <string name="buttonActivity">Activity</string>
     <string name="buttonShare">Отправить</string>
     <string name="msg_error">Заполните пустое поле</string>

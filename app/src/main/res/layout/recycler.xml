@@ -10,7 +10,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btn_about"
-        app:srcCompat="@android:drawable/ic_dialog_info"
         tools:ignore="MissingConstraints" />
 
     <androidx.recyclerview.widget.RecyclerView

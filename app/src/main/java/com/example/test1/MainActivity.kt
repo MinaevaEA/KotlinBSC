@@ -7,14 +7,11 @@ import android.os.Bundle
 
 class MainActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_first)
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, FirstFragment())
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ListFragment())
             .commit()
-
-
     }
 }
 

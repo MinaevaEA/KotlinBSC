@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.Button
 
 
-
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,34 +18,33 @@ import androidx.recyclerview.widget.RecyclerView
 data class NoteData(var title: String, var subtitle: String)
 
 
-class FirstFragment: Fragment() , FirstMainUi {
- private lateinit var noteFragment: RecyclerView
- private lateinit var adapter: CustomRecyclerAdapter
+class ListFragment : Fragment(), ListMainView {
+    private lateinit var adapter: CustomRecyclerAdapter
     private lateinit var btnAbout: Button
-
+    private var notes = mutableListOf<NoteData>()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ):View? {
+    ): View? {
         val view = inflater.inflate(R.layout.recycler, container, false) //recycler ok
-        noteFragment = view.findViewById(R.id.recyclerView) as RecyclerView //ok
-        noteFragment.layoutManager = LinearLayoutManager(context)
+        val recyclerFragment: RecyclerView =
+            view.findViewById(R.id.recyclerView) as RecyclerView //ok
+        recyclerFragment.layoutManager = LinearLayoutManager(context)
         adapter = CustomRecyclerAdapter(notes)
-        noteFragment.adapter = adapter
+        recyclerFragment.adapter = adapter
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val presenter = ListPresenter(this)
         btnAbout = view.findViewById(R.id.about)
-        val presenter = FirstPresenter(this)
         btnAbout.setOnClickListener {
-            presenter.activityBtnClick()
+            presenter.btnAboutActivityClick()
         }
     }
 
-     private  var notes = mutableListOf<NoteData>()
     init {
         for (i in 0 until 100) {
             val note = NoteData(title = String(), subtitle = String())
@@ -55,11 +53,9 @@ class FirstFragment: Fragment() , FirstMainUi {
             notes += note
         }
     }
-    override fun startIntent() {
+
+    override fun openActivityAbout() {
         val intent = Intent(requireContext(), AboutActivity::class.java)
-          startActivity(intent)
+        startActivity(intent)
     }
-
-
-
 }

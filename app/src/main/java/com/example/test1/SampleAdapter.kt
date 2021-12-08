@@ -17,8 +17,7 @@ class CustomRecyclerAdapter(private var notes: List<NoteData>) :
         RecyclerView.ViewHolder(itemView) {
 
         private val title: TextView = itemView.findViewById(R.id.title)
-        private val subtitle: TextView = itemView.findViewById(R.id.message)
-
+        private val subtitle: TextView = itemView.findViewById(R.id.text)
 
         fun bind(data: NoteData) {
             title.text = data.title
@@ -29,9 +28,7 @@ class CustomRecyclerAdapter(private var notes: List<NoteData>) :
                 activity.supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, newFragment).commit()
             }
-
         }
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -44,12 +41,9 @@ class CustomRecyclerAdapter(private var notes: List<NoteData>) :
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(notes[position])
-
     }
 
     override fun getItemCount(): Int = notes.size
-
-
 }
 
 
