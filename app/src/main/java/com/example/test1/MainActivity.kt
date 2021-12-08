@@ -9,7 +9,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_first)
+        setContentView(R.layout.main_activity)
         supportFragmentManager.beginTransaction().replace(R.id.fragment_container, ListFragment())
             .commit()
     }

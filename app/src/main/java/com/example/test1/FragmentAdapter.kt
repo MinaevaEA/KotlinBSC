@@ -10,21 +10,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 
 
-class CustomRecyclerAdapter(private var notes: List<NoteData>) :
-    RecyclerView.Adapter<CustomRecyclerAdapter.MyViewHolder>() {
+class FragmentAdapter(private var notes: List<NoteData>) :
+    RecyclerView.Adapter<FragmentAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
 
         private val title: TextView = itemView.findViewById(R.id.title)
-        private val subtitle: TextView = itemView.findViewById(R.id.text)
+        private val content: TextView = itemView.findViewById(R.id.text)
 
         fun bind(data: NoteData) {
             title.text = data.title
-            subtitle.text = data.subtitle
+            content.text = data.subtitle
             itemView.setOnClickListener { v ->
                 val activity = v.context as AppCompatActivity
-                val newFragment = SecondFragment.newInstance(data.title, data.subtitle)
+                val newFragment = NoteFragment.newInstance(data.title, data.subtitle)
                 activity.supportFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, newFragment).commit()
             }

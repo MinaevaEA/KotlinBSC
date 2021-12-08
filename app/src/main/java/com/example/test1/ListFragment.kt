@@ -19,7 +19,7 @@ data class NoteData(var title: String, var subtitle: String)
 
 
 class ListFragment : Fragment(), ListMainView {
-    private lateinit var adapter: CustomRecyclerAdapter
+    private lateinit var adapter: FragmentAdapter
     private lateinit var btnAbout: Button
     private var notes = mutableListOf<NoteData>()
     override fun onCreateView(
@@ -31,7 +31,7 @@ class ListFragment : Fragment(), ListMainView {
         val recyclerFragment: RecyclerView =
             view.findViewById(R.id.recyclerView) as RecyclerView //ok
         recyclerFragment.layoutManager = LinearLayoutManager(context)
-        adapter = CustomRecyclerAdapter(notes)
+        adapter = FragmentAdapter(notes)
         recyclerFragment.adapter = adapter
         return view
     }

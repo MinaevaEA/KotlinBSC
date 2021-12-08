@@ -1,6 +1,6 @@
 package com.example.test1
 
-class SecondPresenter(private val fragmentUi: SecondFragmentView) {
+class NotePresenter(private val fragmentUi: NoteFragmentView) {
     fun onNewTodo(title: String, message: String) {
         if (title.isEmpty() && message.isEmpty()) {
             fragmentUi.onSaveFailed()

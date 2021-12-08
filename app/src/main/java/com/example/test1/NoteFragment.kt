@@ -16,7 +16,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 
 
-class SecondFragment : Fragment(), SecondFragmentView {
+class NoteFragment : Fragment(), NoteFragmentView {
     private lateinit var title: EditText
     private lateinit var message: EditText
     private lateinit var btnToast: Button
@@ -33,7 +33,7 @@ class SecondFragment : Fragment(), SecondFragmentView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val presenter = SecondPresenter(this)
+        val presenter = NotePresenter(this)
         val args = this.arguments
         val inputTitle = args?.getString(SAMPLE_STRING_TITLE)
         val inputSub = args?.getString(SAMPLE_STRING_ARG)
@@ -60,7 +60,7 @@ class SecondFragment : Fragment(), SecondFragmentView {
         private const val SAMPLE_STRING_ARG: String = "Текст"
         private const val SAMPLE_STRING_TITLE: String = "Заголовок"
 
-        fun newInstance(title: String, subtitle: String): SecondFragment = SecondFragment().apply {
+        fun newInstance(title: String, subtitle: String): NoteFragment = NoteFragment().apply {
             arguments = bundleOf(
                 SAMPLE_STRING_TITLE to title,
                 SAMPLE_STRING_ARG to subtitle,
