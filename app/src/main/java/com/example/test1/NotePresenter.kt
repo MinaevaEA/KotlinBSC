@@ -1,9 +1,9 @@
 package com.example.test1
 
 class NotePresenter(private val fragmentUi: NoteFragmentView) {
-    fun onNewTodo(title: String, message: String) {
+    fun onNewSave(title: String, message: String) {
         if (title.isEmpty() && message.isEmpty()) {
-            fragmentUi.onSaveFailed()
+            fragmentUi.onNoteEmpty()
         } else {
             fragmentUi.onSaveSuccess()
         }
@@ -11,7 +11,7 @@ class NotePresenter(private val fragmentUi: NoteFragmentView) {
 
     fun shareBtnClick(title: String, message: String) {
         if (message.isEmpty()) {
-            fragmentUi.onSaveFailed()
+            fragmentUi.onNoteEmpty()
         } else {
             fragmentUi.shareNote(title, message)
         }

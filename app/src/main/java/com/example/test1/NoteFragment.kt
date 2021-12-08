@@ -19,7 +19,7 @@ import androidx.core.os.bundleOf
 class NoteFragment : Fragment(), NoteFragmentView {
     private lateinit var title: EditText
     private lateinit var message: EditText
-    private lateinit var btnToast: Button
+    private lateinit var btnSave: Button
     private lateinit var btnShare: Button
 
     override fun onCreateView(
@@ -36,17 +36,17 @@ class NoteFragment : Fragment(), NoteFragmentView {
         val presenter = NotePresenter(this)
         val args = this.arguments
         val inputTitle = args?.getString(SAMPLE_STRING_TITLE)
-        val inputSub = args?.getString(SAMPLE_STRING_ARG)
+        val inputText = args?.getString(SAMPLE_STRING_ARG)
 
         title = view.findViewById(R.id.title)
         message = view.findViewById(R.id.message)
-        btnToast = view.findViewById(R.id.buttonToast)
+        btnSave = view.findViewById(R.id.buttonToast)
         btnShare = view.findViewById(R.id.buttonShare)
         title.setText(inputTitle)
-        message.setText(inputSub)
+        message.setText(inputText)
 
-        btnToast.setOnClickListener {
-            presenter.onNewTodo(title.text.toString(), message.text.toString())
+        btnSave.setOnClickListener {
+            presenter.onNewSave(title.text.toString(), message.text.toString())
         }
         btnShare.setOnClickListener {
             presenter.shareBtnClick(
@@ -72,7 +72,7 @@ class NoteFragment : Fragment(), NoteFragmentView {
         showNotification(getString(R.string.save_msg))
     }
 
-    override fun onSaveFailed() {
+    override fun onNoteEmpty() {
         showNotification(getString(R.string.msg_error))
     }
 
