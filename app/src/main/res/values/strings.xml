@@ -7,7 +7,7 @@
     <string name="buttonActivity">Activity</string>
     <string name="buttonShare">Отправить</string>
     <string name="msg_error">Заполните пустое поле</string>
-    <string name="text">Заголовок списка,</string>
+    <string name="text">О приложении</string>
     <string name="text2">Тело списка</string>
     <string name="save_msg">Сохранено</string>
     <string name="btn_about">About</string>

@@ -10,10 +10,9 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/title"
-        tools:ignore="Autofill,TextFields"
         android:layout_marginTop="50dp"
-        />
+        android:hint="@string/title"
+        tools:ignore="Autofill,TextFields" />
 
     <EditText
         android:id="@+id/message"
@@ -26,11 +25,11 @@
         android:id="@+id/buttonToast"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/buttonSave"/>
+        android:text="@string/buttonSave" />
+
     <Button
         android:id="@+id/buttonShare"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="@string/buttonShare"
-      />
+        android:text="@string/buttonShare" />
 </LinearLayout>
