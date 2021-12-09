@@ -2,7 +2,7 @@
     <string name="app_name">New application</string>
 
     <string name="title">Заголовок</string>
-    <string name="message">Введите текст</string>
+    <string name="content">Введите текст</string>
     <string name="buttonSave">Save</string>
     <string name="buttonActivity">Activity</string>
     <string name="buttonShare">Отправить</string>
