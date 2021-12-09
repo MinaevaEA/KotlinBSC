@@ -2,14 +2,15 @@
     <string name="app_name">New application</string>
 
     <string name="title">Заголовок</string>
-    <string name="message">Введите текст</string>
-    <string name="buttonToast">Toast</string>
+    <string name="content">Введите текст</string>
+    <string name="buttonSave">Save</string>
     <string name="buttonActivity">Activity</string>
     <string name="buttonShare">Отправить</string>
     <string name="msg_error">Заполните пустое поле</string>
-    <string name="text">Здесь будут выведены данные всех заметок,</string>
-    <string name="text2">когда будет реализована БД</string>
+    <string name="text">О приложении</string>
+    <string name="text2">Тело списка</string>
     <string name="save_msg">Сохранено</string>
+    <string name="btn_about">About</string>
 
 
 </resources>
