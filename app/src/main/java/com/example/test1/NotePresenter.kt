@@ -1,23 +1,26 @@
 package com.example.test1
 
-class NotePresenter(private val fragmentView: NoteFragmentView, noteData: NoteData?) {
-    fun onNewSave(title: String, message: String) {
-        if (title.isEmpty() && message.isEmpty()) {
-            fragmentView.onNoteEmpty()
+class NotePresenter(private val noteView: NoteView, noteData: NoteData?) {
+
+    fun onNoteSave(noteData: NoteData) {
+
+        if (noteData.title.isEmpty() && noteData.text.isEmpty()) {
+            noteView.onNoteEmpty()
         } else {
-            fragmentView.onSaveSuccess()
+            noteView.onSaveSuccess()
         }
     }
 
-    fun btnShareClick(title: String, message: String) {
-        if (message.isEmpty()) {
-            fragmentView.onNoteEmpty()
+    fun btnShareClick(noteData: NoteData) {
+
+        if (noteData.text.isEmpty()) {
+            noteView.onNoteEmpty()
         } else {
-            fragmentView.shareNote(title, message)
+            noteView.shareNote(noteData.title, noteData.text)
         }
     }
 
     init {
-        fragmentView.showNote(noteData)
+        noteView.showNote(noteData)
     }
 }

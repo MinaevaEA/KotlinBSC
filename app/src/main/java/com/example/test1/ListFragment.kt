@@ -20,15 +20,18 @@ data class NoteData(var title: String, var text: String) : Parcelable
 class ListFragment : Fragment(), ListMainView {
 
     private lateinit var presenter: ListPresenter
-    private lateinit var adapter: FragmentAdapter
+    private lateinit var adapter: ListNoteAdapter
     private lateinit var btnAboutClick: Button
+
     override fun onCreateView(
+
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? = inflater.inflate(R.layout.fragment_list, container, false) //recycler ok
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
         presenter = ListPresenter(this)
         val recyclerFragment: RecyclerView =
@@ -42,15 +45,18 @@ class ListFragment : Fragment(), ListMainView {
     }
 
     override fun openActivityAbout() {
+
         val intent = Intent(requireContext(), AboutActivity::class.java)
         startActivity(intent)
     }
 
     override fun showNoteList(notes: List<NoteData>) {
-        adapter = FragmentAdapter(notes, ::openNote)
+
+        adapter = ListNoteAdapter(notes, ::openNote)
     }
 
     override fun onNoteOpen(noteData: NoteData) {
+
         val activity = requireContext() as AppCompatActivity
         val newFragment = NoteFragment.newInstance(noteData)
         activity.supportFragmentManager.beginTransaction()
@@ -58,6 +64,7 @@ class ListFragment : Fragment(), ListMainView {
     }
 
     private fun openNote(noteData: NoteData) {
+
         presenter.openNote(noteData)
     }
 }

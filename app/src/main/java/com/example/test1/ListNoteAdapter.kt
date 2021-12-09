@@ -8,11 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class FragmentAdapter(
+class ListNoteAdapter(
     private val notes: List<NoteData>,
     private val clickListener: (NoteData) -> Unit
 ) :
-    RecyclerView.Adapter<FragmentAdapter.MyViewHolder>() {
+    RecyclerView.Adapter<ListNoteAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {

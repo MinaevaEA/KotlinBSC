@@ -13,7 +13,8 @@ import android.widget.EditText
 import android.widget.Toast
 
 
-class NoteFragment : Fragment(), NoteFragmentView {
+class NoteFragment : Fragment(), NoteView {
+
     private lateinit var presenter: NotePresenter
     private lateinit var title: EditText
     private lateinit var content: EditText
@@ -29,7 +30,7 @@ class NoteFragment : Fragment(), NoteFragmentView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args = this.arguments
-        val inputData = args?.getParcelable<NoteData>(SAMPLE_STRING_NOTE_DATA)
+        val inputData = args?.getParcelable<NoteData>(NOTE_DATA)
         title = view.findViewById(R.id.title)
         content = view.findViewById(R.id.content)
         btnSave = view.findViewById(R.id.buttonSave)
@@ -37,21 +38,21 @@ class NoteFragment : Fragment(), NoteFragmentView {
         presenter = NotePresenter(this, inputData)
 
         btnSave.setOnClickListener {
-            presenter.onNewSave(title.text.toString(), content.text.toString())
+            presenter.onNoteSave((NoteData(title.text.toString(), content.text.toString())))
         }
         btnShare.setOnClickListener {
             presenter.btnShareClick(
-                title.text.toString(), content.text.toString()
+                (NoteData(title.text.toString(), content.text.toString()))
             )
         }
     }
 
     companion object {
 
-        private const val SAMPLE_STRING_NOTE_DATA: String = "Данные"
+        private const val NOTE_DATA: String = "Данные"
 
         fun newInstance(noteData: NoteData): NoteFragment = NoteFragment().apply {
-            arguments = Bundle().apply { putParcelable(SAMPLE_STRING_NOTE_DATA, noteData) }
+            arguments = Bundle().apply { putParcelable(NOTE_DATA, noteData) }
         }
     }
 
@@ -77,6 +78,7 @@ class NoteFragment : Fragment(), NoteFragmentView {
     }
 
     override fun showNote(noteData: NoteData?) {
+
         title.setText(noteData?.title)
         content.setText(noteData?.text)
     }

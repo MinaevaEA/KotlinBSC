@@ -1,12 +1,15 @@
 package com.example.test1
 
 class ListPresenter(private val mainView: ListMainView) {
+
     private var notes = mutableListOf<NoteData>()
+
     fun btnAboutActivityClick() {
         mainView.openActivityAbout()
     }
 
     fun openNote(noteData: NoteData) {
+
         mainView.onNoteOpen(noteData)
     }
 
