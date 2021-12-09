@@ -20,7 +20,7 @@ data class NoteData(var title: String, var text: String) : Parcelable
 class ListFragment : Fragment(), ListMainView {
 
     private lateinit var presenter: ListPresenter
-    private lateinit var adapter: ListNoteAdapter
+    private lateinit var adapter: NoteListAdapter
     private lateinit var btnAboutClick: Button
 
     override fun onCreateView(
@@ -52,7 +52,7 @@ class ListFragment : Fragment(), ListMainView {
 
     override fun showNoteList(notes: List<NoteData>) {
 
-        adapter = ListNoteAdapter(notes, ::openNote)
+        adapter = NoteListAdapter(notes, ::openNote)
     }
 
     override fun onNoteOpen(noteData: NoteData) {

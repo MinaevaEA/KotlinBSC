@@ -2,7 +2,7 @@ package com.example.test1
 
 class NotePresenter(private val noteView: NoteView, noteData: NoteData?) {
 
-    fun onNoteSave(noteData: NoteData) {
+    fun saveNote(noteData: NoteData) {
 
         if (noteData.title.isEmpty() && noteData.text.isEmpty()) {
             noteView.onNoteEmpty()
@@ -11,12 +11,12 @@ class NotePresenter(private val noteView: NoteView, noteData: NoteData?) {
         }
     }
 
-    fun btnShareClick(noteData: NoteData) {
+    fun shareNote(noteData: NoteData) {
 
         if (noteData.text.isEmpty()) {
             noteView.onNoteEmpty()
         } else {
-            noteView.shareNote(noteData.title, noteData.text)
+            noteView.shareNote(noteData)
         }
     }
 

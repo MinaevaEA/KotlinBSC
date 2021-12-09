@@ -38,10 +38,10 @@ class NoteFragment : Fragment(), NoteView {
         presenter = NotePresenter(this, inputData)
 
         btnSave.setOnClickListener {
-            presenter.onNoteSave((NoteData(title.text.toString(), content.text.toString())))
+            presenter.saveNote((NoteData(title.text.toString(), content.text.toString())))
         }
         btnShare.setOnClickListener {
-            presenter.btnShareClick(
+            presenter.shareNote(
                 (NoteData(title.text.toString(), content.text.toString()))
             )
         }
@@ -69,10 +69,10 @@ class NoteFragment : Fragment(), NoteView {
             .show()
     }
 
-    override fun shareNote(title: String, message: String) {
+    override fun shareNote(noteData: NoteData) {
         val shareIntent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, "$title/$message")
+            putExtra(Intent.EXTRA_TEXT, "$noteData")
         }
         startActivity(shareIntent)
     }
