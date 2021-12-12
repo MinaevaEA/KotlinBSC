@@ -10,16 +10,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
-
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.viewpager2.widget.ViewPager2
 
 class NoteFragment : Fragment(), NoteView {
 
     private lateinit var presenter: NotePresenter
     private lateinit var title: EditText
     private lateinit var content: EditText
-    private lateinit var btnSave: Button
+ //   private lateinit var btnSave: ImageButton
     private lateinit var btnShare: Button
+   // private lateinit var toolbar: Toolbar
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,15 +36,18 @@ class NoteFragment : Fragment(), NoteView {
         super.onViewCreated(view, savedInstanceState)
         val args = this.arguments
         val inputData = args?.getParcelable<NoteData>(NOTE_DATA)
+      //  toolbar = view.findViewById(R.id.toolbar)
+        //(activity as AppCompatActivity).setSupportActionBar(toolbar)
+
+      //  btnSave = view.findViewById(R.id.buttonSave)
         title = view.findViewById(R.id.title)
         content = view.findViewById(R.id.content)
-        btnSave = view.findViewById(R.id.buttonSave)
         btnShare = view.findViewById(R.id.buttonShare)
         presenter = NotePresenter(this, inputData)
 
-        btnSave.setOnClickListener {
+     /*  btnSave.setOnClickListener {
             presenter.saveNote((NoteData(title.text.toString(), content.text.toString())))
-        }
+        } */
         btnShare.setOnClickListener {
             presenter.shareNote(
                 (NoteData(title.text.toString(), content.text.toString()))
@@ -48,7 +56,6 @@ class NoteFragment : Fragment(), NoteView {
     }
 
     companion object {
-
         private const val NOTE_DATA: String = "Данные"
 
         fun newInstance(noteData: NoteData): NoteFragment = NoteFragment().apply {

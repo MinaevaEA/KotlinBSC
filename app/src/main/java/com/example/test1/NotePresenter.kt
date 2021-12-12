@@ -1,6 +1,10 @@
 package com.example.test1
 
+import android.content.Context
+import android.content.Intent
+
 class NotePresenter(private val noteView: NoteView, noteData: NoteData?) {
+
 
     fun saveNote(noteData: NoteData) {
 
@@ -23,4 +27,6 @@ class NotePresenter(private val noteView: NoteView, noteData: NoteData?) {
     init {
         noteView.showNote(noteData)
     }
+
+
 }

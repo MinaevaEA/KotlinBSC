@@ -6,4 +6,5 @@ interface NoteView {
     fun onSaveSuccess()
     fun shareNote(noteData: NoteData)
     fun showNote(noteData: NoteData?)
+
 }

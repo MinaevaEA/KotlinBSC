@@ -8,9 +8,8 @@ class ListPresenter(private val mainView: ListMainView) {
         mainView.openActivityAbout()
     }
 
-    fun openNote(noteData: NoteData) {
-
-        mainView.onNoteOpen(noteData)
+    fun openNote(notes: List<NoteData>, currentPosition: Int) {
+        mainView.onNoteOpen(notes, currentPosition)
     }
 
     init {
