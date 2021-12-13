@@ -23,7 +23,7 @@ class NoteFragment : Fragment(), NoteView {
     private lateinit var content: EditText
  //   private lateinit var btnSave: ImageButton
     private lateinit var btnShare: Button
-   // private lateinit var toolbar: Toolbar
+
 
 
     override fun onCreateView(
@@ -36,10 +36,7 @@ class NoteFragment : Fragment(), NoteView {
         super.onViewCreated(view, savedInstanceState)
         val args = this.arguments
         val inputData = args?.getParcelable<NoteData>(NOTE_DATA)
-      //  toolbar = view.findViewById(R.id.toolbar)
-        //(activity as AppCompatActivity).setSupportActionBar(toolbar)
 
-      //  btnSave = view.findViewById(R.id.buttonSave)
         title = view.findViewById(R.id.title)
         content = view.findViewById(R.id.content)
         btnShare = view.findViewById(R.id.buttonShare)
