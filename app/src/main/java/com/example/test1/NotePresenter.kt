@@ -1,32 +1,22 @@
 package com.example.test1
 
-import android.content.Context
-import android.content.Intent
-
-class NotePresenter(private val noteView: NoteView, noteData: NoteData?) {
+import com.example.test1.database.NoteData
 
 
-    fun saveNote(noteData: NoteData) {
+class NotePresenter(private val noteView: NoteView, private val noteData: NoteData?) {
 
-        if (noteData.title.isEmpty() && noteData.text.isEmpty()) {
-            noteView.onNoteEmpty()
-        } else {
-            noteView.onSaveSuccess()
-        }
-    }
+     fun shareNote() {
 
-    fun shareNote(noteData: NoteData) {
+         if (noteData?.text.isNullOrEmpty()) {
+             noteView.onNoteEmpty()
+         } else {
+            // noteView.shareNote(noteData)
+         }
+     }
 
-        if (noteData.text.isEmpty()) {
-            noteView.onNoteEmpty()
-        } else {
-            noteView.shareNote(noteData)
-        }
-    }
-
-    init {
-        noteView.showNote(noteData)
-    }
+     init {
+         noteView.showNote(noteData)
+     }
 
 
 }

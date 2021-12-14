@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.test1.database.NoteData
 
 open class ListAdapter(
     private val notes: List<NoteData>,
