@@ -1,4 +1,4 @@
-package com.example.test1
+package com.example.test1.list
 
 
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.test1.R
 import com.example.test1.database.NoteData
 
 open class ListAdapter(

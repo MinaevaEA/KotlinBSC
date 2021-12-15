@@ -1,4 +1,4 @@
-package com.example.test1
+package com.example.test1.note
 
 
 import android.content.Intent
@@ -11,7 +11,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.lifecycleScope
+import com.example.test1.R
 import com.example.test1.database.NoteData
+import com.example.test1.pager.NotePagerActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class NoteFragment : Fragment(), NoteView {
@@ -33,13 +39,19 @@ class NoteFragment : Fragment(), NoteView {
         title = view.findViewById(R.id.title)
         content = view.findViewById(R.id.content)
         btnShare = view.findViewById(R.id.buttonShare)
-        presenter = NotePresenter(this, inputData)
+        presenter = NotePresenter(this, inputData, requireContext())
 
         btnShare.setOnClickListener {
               presenter.shareNote()
         }
+        title.addTextChangedListener { presenter.updateTitle(it?.toString().orEmpty()) }
+        content.addTextChangedListener { presenter.updateText(it?.toString().orEmpty()) }
     }
 
+    override fun onResume() {
+        super.onResume()
+        (activity as? NotePagerActivity)?.currentFragment = this
+    }
     companion object {
         private const val NOTE_DATA: String = "Данные"
 
@@ -72,6 +84,11 @@ class NoteFragment : Fragment(), NoteView {
     override fun showNote(noteData: NoteData?) {
         title.setText(noteData?.title)
         content.setText(noteData?.text)
+    }
+
+    fun save() {
+        lifecycleScope.launch(Dispatchers.IO)
+        { presenter.save()}
     }
 
 }

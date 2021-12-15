@@ -1,4 +1,4 @@
-package com.example.test1
+package com.example.test1.pager
 
 import android.content.Context
 import android.content.Intent
@@ -8,13 +8,17 @@ import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.example.test1.R
 import com.example.test1.database.NoteData
+import com.example.test1.note.NoteFragment
 
 class NotePagerActivity : FragmentActivity(), PagerView {
 
     private lateinit var presenter: PagerPresenter
     private lateinit var viewPager: ViewPager2
     private lateinit var toolbar: Toolbar
+    private lateinit var adapter: PagerListAdapter
+    var currentFragment: NoteFragment?= null
 
     private val startPosition: Int by lazy {
         intent.getIntExtra(SELECTED_POSITION, 0)
@@ -27,7 +31,8 @@ class NotePagerActivity : FragmentActivity(), PagerView {
         //AppCompatActivity().setSupportActionBar(toolbar)
         viewPager = findViewById<ViewPager2>(R.id.viewpager).apply {
             val list = intent.getParcelableArrayListExtra(NOTES_LIST) ?: emptyList<NoteData>()
-            adapter = PagerListAdapter(list, this@NotePagerActivity)
+            this@NotePagerActivity.adapter = PagerListAdapter(list, this@NotePagerActivity)
+            adapter = this@NotePagerActivity.adapter
             setCurrentItem(startPosition, false)
 
         }
@@ -35,6 +40,7 @@ class NotePagerActivity : FragmentActivity(), PagerView {
         findViewById<ImageButton>(R.id.buttonSave).also {
             it.setOnClickListener {
                //  presenter.saveNote()
+                currentFragment?.save()
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.test1
+package com.example.test1.list
 
 import com.example.test1.database.NoteData
 import kotlinx.coroutines.flow.Flow

@@ -14,7 +14,7 @@
         android:fullBackupContent="true">
 
         <activity android:name=".AboutActivity" />
-        <activity android:name=".NotePagerActivity" />
+        <activity android:name=".pager.NotePagerActivity" />
 
         <activity
             android:name=".MainActivity"
