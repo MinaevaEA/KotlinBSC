@@ -13,11 +13,11 @@ interface NoteDao {
      fun findByTitleName(title: String): NoteData
 
     @Insert
-     fun insert(note: NoteData): Long
+    suspend fun insert(note: NoteData): Long
 
     @Update
-     fun update(note: NoteData)
+    suspend fun update(note: NoteData)
 
     @Delete
-     fun delete(note: NoteData)
+    suspend fun delete(note: NoteData)
 }

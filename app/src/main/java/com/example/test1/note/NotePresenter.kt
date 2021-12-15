@@ -17,13 +17,15 @@ val database = NoteDataBase.getDatabase(context)
          }
      }
 
-    fun save() {
-        noteData?.also  {
+   suspend fun save() {
+       noteData?.also  {
 
-            if (it.id >= 0) {
+            if (it.id > 0) {
                 database.noteDao().update(it)
             }else{
-                database.noteDao().insert(it)
+                database.noteDao().insert(it).also {
+                    updateId(it)
+                }
             }
         }
     }
@@ -37,6 +39,11 @@ val database = NoteDataBase.getDatabase(context)
     fun updateText(text: String) {
         noteData?.also {
             noteData = it.copy(text = text)
+        }
+    }
+    fun updateId(id: Long) {
+        noteData?.also {
+            noteData = it.copy(id = id)
         }
     }
 

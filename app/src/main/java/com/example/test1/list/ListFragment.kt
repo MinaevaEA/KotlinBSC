@@ -44,13 +44,14 @@ class ListFragment : Fragment(), ListMainView {
             presenter.btnAboutActivityClick()
         }
         btnCreateNote.setOnClickListener {
-            val newNote = NoteData(-1,"","")
+            val newNote = NoteData(0,"","")
             val newNoteList = mutableListOf<NoteData>().apply {
                 addAll(presenter.notes)
                 add(newNote) }
             presenter.notes = newNoteList
             presenter.openNote(newNoteList,newNoteList.size-1)
         }
+        presenter.loadAllNotes()
     }
 
 
