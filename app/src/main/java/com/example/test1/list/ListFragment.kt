@@ -23,7 +23,7 @@ class ListFragment : Fragment(), ListMainView {
     private lateinit var presenter: ListPresenter
     private lateinit var adapter: ListAdapter
     private lateinit var btnAboutClick: Button
-    private lateinit var btnCreateNote:ImageButton
+    private lateinit var btnCreateNote: ImageButton
     private lateinit var toolbar: Toolbar
 
     override fun onCreateView(
@@ -37,23 +37,21 @@ class ListFragment : Fragment(), ListMainView {
         btnCreateNote = view.findViewById(R.id.add_note)
         presenter = ListPresenter(this, requireContext())
         toolbar = view.findViewById(R.id.toolbarMain)
-        //AppCompatActivity().setSupportActionBar(toolbarMain)
-
         btnAboutClick = view.findViewById(R.id.about)
         btnAboutClick.setOnClickListener {
             presenter.btnAboutActivityClick()
         }
         btnCreateNote.setOnClickListener {
-            val newNote = NoteData(0,"","")
+            val newNote = NoteData(0, "", "")
             val newNoteList = mutableListOf<NoteData>().apply {
                 addAll(presenter.notes)
-                add(newNote) }
+                add(newNote)
+            }
             presenter.notes = newNoteList
-            presenter.openNote(newNoteList,newNoteList.size-1)
+            presenter.openNote(newNoteList, newNoteList.size - 1)
         }
         presenter.loadAllNotes()
     }
-
 
     override fun openActivityAbout() {
         startActivity(Intent(requireContext(), AboutActivity::class.java))
@@ -77,7 +75,6 @@ class ListFragment : Fragment(), ListMainView {
             NotePagerActivity.startActivity(it, notes, currentPosition)
         }
     }
-
 
     private fun openNote(notes: List<NoteData>, currentPosition: Int) {
         presenter.openNote(notes, currentPosition)

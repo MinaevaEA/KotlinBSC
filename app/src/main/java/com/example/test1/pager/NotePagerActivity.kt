@@ -10,15 +10,15 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.test1.R
 import com.example.test1.database.NoteData
+import com.example.test1.note.DialogNoteFragment
 import com.example.test1.note.NoteFragment
 
 class NotePagerActivity : FragmentActivity(), PagerView {
-
     private lateinit var presenter: PagerPresenter
     private lateinit var viewPager: ViewPager2
     private lateinit var toolbar: Toolbar
     private lateinit var adapter: PagerListAdapter
-    var currentFragment: NoteFragment?= null
+    var currentFragment: NoteFragment? = null
 
     private val startPosition: Int by lazy {
         intent.getIntExtra(SELECTED_POSITION, 0)
@@ -28,7 +28,6 @@ class NotePagerActivity : FragmentActivity(), PagerView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_viewpager)
         toolbar = findViewById(R.id.toolbar)
-        //AppCompatActivity().setSupportActionBar(toolbar)
         viewPager = findViewById<ViewPager2>(R.id.viewpager).apply {
             val list = intent.getParcelableArrayListExtra(NOTES_LIST) ?: emptyList<NoteData>()
             this@NotePagerActivity.adapter = PagerListAdapter(list, this@NotePagerActivity)
@@ -39,8 +38,10 @@ class NotePagerActivity : FragmentActivity(), PagerView {
         presenter = PagerPresenter(this)
         findViewById<ImageButton>(R.id.buttonSave).also {
             it.setOnClickListener {
-               //  presenter.saveNote()
-                currentFragment?.save()
+                val openDialog = DialogNoteFragment()
+                val fragmentManager = this@NotePagerActivity.supportFragmentManager
+                openDialog.show(fragmentManager, "name")
+
             }
         }
     }
@@ -73,5 +74,9 @@ class NotePagerActivity : FragmentActivity(), PagerView {
     private fun showNotification(msg_toast: Int) {
         Toast.makeText(this, msg_toast, Toast.LENGTH_SHORT)
             .show()
+    }
+
+    fun continueSave() {
+        currentFragment?.save()
     }
 }

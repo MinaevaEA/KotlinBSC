@@ -69,11 +69,13 @@ class NoteFragment : Fragment(), NoteView {
     }
 
     private fun showNotification(msg_toast: Int) {
-        Toast.makeText(requireContext(), msg_toast, Toast.LENGTH_SHORT)
-            .show()
+        lifecycleScope.launch {
+            Toast.makeText(requireContext(), msg_toast, Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
-    override fun shareNote(noteData: NoteData) {
+    override fun shareNote(noteData: NoteData?) {
         val shareIntent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
             putExtra(Intent.EXTRA_TEXT, "$noteData")

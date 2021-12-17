@@ -10,7 +10,7 @@ interface NoteDao {
     fun getAll(): Flow<List<NoteData>>
 
     @Query("SELECT * FROM notes WHERE note_title LIKE :title LIMIT 1")
-     fun findByTitleName(title: String): NoteData
+    fun findByTitleName(title: String): NoteData
 
     @Insert
     suspend fun insert(note: NoteData): Long

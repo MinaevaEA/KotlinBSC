@@ -7,5 +7,4 @@ interface ListMainView {
     fun openActivityAbout()
     fun showNoteList(notes: Flow<List<NoteData>>)
     fun onNoteOpen(notes: List<NoteData>, currentPosition: Int)
-
 }
