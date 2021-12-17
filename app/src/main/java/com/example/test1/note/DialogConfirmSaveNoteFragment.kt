@@ -3,7 +3,6 @@ package com.example.test1.note
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.example.test1.R
 import com.example.test1.pager.NotePagerActivity

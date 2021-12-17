@@ -9,7 +9,6 @@ class NotePresenter(
     private var noteData: NoteData?,
     context: Context
 ) {
-
     val database = NoteDataBase.getDatabase(context)
     fun shareNote() {
 
