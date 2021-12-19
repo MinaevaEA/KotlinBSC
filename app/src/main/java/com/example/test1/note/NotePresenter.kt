@@ -2,20 +2,22 @@ package com.example.test1.note
 
 import android.content.Context
 import com.example.test1.database.NoteData
-import com.example.test1.database.NoteDataBase
+import com.example.test1.database.NoteDatabase
 
 class NotePresenter(
     private val noteView: NoteView,
     private var noteData: NoteData?,
     context: Context
 ) {
-    val database = NoteDataBase.getDatabase(context)
-    fun shareNote() {
+    private val database = NoteDatabase.getDatabase(context)
 
-        if (noteData?.text.isNullOrEmpty()) {
-            noteView.onNoteEmpty()
-        } else {
-            noteView.shareNote(noteData)
+    fun shareNote() {
+        noteData?.let {
+            if (it.title.isEmpty() && it.text.isEmpty()) {
+                noteView.onNoteEmpty()
+            } else {
+                noteView.shareNote(it)
+            }
         }
     }
 
@@ -26,10 +28,12 @@ class NotePresenter(
             } else {
                 if (it.id > 0) {
                     database.noteDao().update(it)
+                    noteView.onSaveSuccess()
                 } else {
-                    database.noteDao().insert(it).also { databaseId ->
-                        updateId(databaseId)
+                    database.noteDao().insert(it).also { newNoteId ->
+                        updateId(newNoteId)
                     }
+                    noteView.onSaveSuccess()
                 }
             }
         }

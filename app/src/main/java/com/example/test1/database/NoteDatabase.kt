@@ -7,22 +7,21 @@ import androidx.room.RoomDatabase
 
 
 @Database(entities = [NoteData::class], version = 1)
-abstract class NoteDataBase : RoomDatabase() {
+abstract class NoteDatabase : RoomDatabase() {
     abstract fun noteDao(): NoteDao
 
     companion object {
         @Volatile
-        private var INSTANCE: NoteDataBase? = null
-        fun getDatabase(context: Context): NoteDataBase {
-            return INSTANCE ?: synchronized(this) {
+        private var INSTANCE: NoteDatabase? = null
+        fun getDatabase(context: Context): NoteDatabase =
+            INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    NoteDataBase::class.java,
+                    NoteDatabase::class.java,
                     "database"
                 ).build()
                 INSTANCE = instance
                 instance
             }
-        }
     }
 }

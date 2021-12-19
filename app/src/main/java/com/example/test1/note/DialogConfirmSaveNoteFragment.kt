@@ -6,11 +6,10 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.example.test1.R
 import com.example.test1.pager.NotePagerActivity
-import java.lang.IllegalStateException
 
 class DialogNoteFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        return activity?.let {
+        return requireActivity().let {
             val builder = AlertDialog.Builder(it)
             builder
                 .setMessage(R.string.dialog_msg)
@@ -18,9 +17,9 @@ class DialogNoteFragment : DialogFragment() {
                     dialog.cancel()
                 }
                 .setPositiveButton(R.string.buttonSave) { _, _ ->
-                    (activity as? NotePagerActivity)?.continueSave()
+                    (it as? NotePagerActivity)?.continueSave()
                 }
                 .create()
-        } ?: throw IllegalStateException("Exception")
+        }
     }
 }

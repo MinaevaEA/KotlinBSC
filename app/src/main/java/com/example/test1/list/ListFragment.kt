@@ -19,10 +19,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class ListFragment : Fragment(), ListMainView {
+class ListFragment : Fragment(), ListView {
     private lateinit var presenter: ListPresenter
     private lateinit var adapter: ListAdapter
-    private lateinit var btnAboutClick: Button
+    private lateinit var btnAbout: Button
     private lateinit var btnCreateNote: ImageButton
     private lateinit var toolbar: Toolbar
 
@@ -37,18 +37,12 @@ class ListFragment : Fragment(), ListMainView {
         btnCreateNote = view.findViewById(R.id.add_note)
         presenter = ListPresenter(this, requireContext())
         toolbar = view.findViewById(R.id.toolbarMain)
-        btnAboutClick = view.findViewById(R.id.about)
-        btnAboutClick.setOnClickListener {
+        btnAbout = view.findViewById(R.id.about)
+        btnAbout.setOnClickListener {
             presenter.btnAboutActivityClick()
         }
         btnCreateNote.setOnClickListener {
-            val newNote = NoteData(0, "", "")
-            val newNoteList = mutableListOf<NoteData>().apply {
-                addAll(presenter.notes)
-                add(newNote)
-            }
-            presenter.notes = newNoteList
-            presenter.openNote(newNoteList, newNoteList.size - 1)
+            presenter.createNote()
         }
         presenter.loadAllNotes()
     }
@@ -60,7 +54,6 @@ class ListFragment : Fragment(), ListMainView {
     override fun showNoteList(notes: Flow<List<NoteData>>) {
         lifecycleScope.launch {
             notes.collect {
-                presenter.notes = it
                 adapter = ListAdapter(it, ::openNote)
                 val recyclerFragment: RecyclerView =
                     view?.findViewById(R.id.recyclerView) as RecyclerView //ok
