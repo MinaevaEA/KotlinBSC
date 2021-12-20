@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -13,7 +12,7 @@ import com.example.test1.database.NoteData
 import com.example.test1.note.DialogNoteFragment
 import com.example.test1.note.NoteFragment
 
-class NotePagerActivity : FragmentActivity(), PagerView {
+class NotePagerActivity : FragmentActivity() {
     private lateinit var viewPager: ViewPager2
     private lateinit var toolbar: Toolbar
     private lateinit var adapter: PagerListAdapter
@@ -54,18 +53,6 @@ class NotePagerActivity : FragmentActivity(), PagerView {
 
             context.startActivity(intent)
         }
-    }
-
-    override fun onSaveSuccess() {
-        showNotification(R.string.save_msg)
-    }
-
-    override fun onNoteEmpty() {
-        showNotification(R.string.msg_error)
-    }
-
-    private fun showNotification(msg_toast: Int) {
-        Toast.makeText(this, msg_toast, Toast.LENGTH_SHORT).show()
     }
 
     fun continueSave() {

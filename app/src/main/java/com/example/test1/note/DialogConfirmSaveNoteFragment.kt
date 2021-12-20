@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import com.example.test1.R
 import com.example.test1.pager.NotePagerActivity
+import java.lang.IllegalStateException
 
 class DialogNoteFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -20,6 +21,6 @@ class DialogNoteFragment : DialogFragment() {
                     (it as? NotePagerActivity)?.continueSave()
                 }
                 .create()
-        }
+        } ?: throw IllegalStateException("Exception")
     }
 }

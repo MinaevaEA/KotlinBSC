@@ -42,7 +42,7 @@ class NoteFragment : Fragment(), NoteView {
         presenter = NotePresenter(this, inputData, requireContext())
 
         btnShare.setOnClickListener {
-            presenter.shareNote()
+            presenter.share()
         }
         title.addTextChangedListener { presenter.updateTitle(it?.toString().orEmpty()) }
         content.addTextChangedListener { presenter.updateText(it?.toString().orEmpty()) }
@@ -51,14 +51,6 @@ class NoteFragment : Fragment(), NoteView {
     override fun onResume() {
         super.onResume()
         (activity as? NotePagerActivity)?.currentFragment = this
-    }
-
-    companion object {
-        private const val NOTE_DATA: String = "Данные"
-
-        fun newInstance(noteData: NoteData): NoteFragment = NoteFragment().apply {
-            arguments = Bundle().apply { putParcelable(NOTE_DATA, noteData) }
-        }
     }
 
     override fun onSaveSuccess() {
@@ -75,7 +67,7 @@ class NoteFragment : Fragment(), NoteView {
         }
     }
 
-    override fun shareNote(noteData: NoteData) {
+    override fun share(noteData: NoteData) {
         val shareIntent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
             putExtra(Intent.EXTRA_TEXT, "${noteData.title}\n${noteData.text}")
@@ -91,6 +83,14 @@ class NoteFragment : Fragment(), NoteView {
     fun save() {
         lifecycleScope.launch(Dispatchers.IO) {
             presenter.save()
+        }
+    }
+
+    companion object {
+        private const val NOTE_DATA: String = "Данные"
+
+        fun newInstance(noteData: NoteData): NoteFragment = NoteFragment().apply {
+            arguments = Bundle().apply { putParcelable(NOTE_DATA, noteData) }
         }
     }
 }

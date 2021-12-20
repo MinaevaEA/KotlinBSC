@@ -4,13 +4,14 @@ import android.content.Context
 import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
 
 class ListPresenter(private val mainView: ListView, context: Context) {
     private var notes: List<NoteData> = listOf()
     val database = NoteDatabase.getDatabase(context)
 
     fun loadAllNotes() {
-        mainView.showNoteList(loadNotes())
+        mainView.showNoteList(loadNotes().onEach { notes = it })
     }
 
     private fun loadNotes(): Flow<List<NoteData>> {
