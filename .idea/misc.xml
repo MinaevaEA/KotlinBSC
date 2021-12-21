@@ -3,26 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/drawable/ic_launcher_background.xml" value="0.14635416666666667" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/about_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/activity_about.xml" value="0.165625" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/activity_data.xml" value="0.264" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/activity_fragment.xml" value="0.12604166666666666" />
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/activity_main.xml" value="0.21240942028985507" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_activity.xml" value="0.264" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_first.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_item.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_item_list.xml" value="0.264" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_item_list1.xml" value="0.1" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_list.xml" value="0.264" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_new.xml" value="0.264" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_note.xml" value="0.165625" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_second.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/list_item.xml" value="0.20923913043478262" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/main_activity.xml" value="0.13072916666666667" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/recycle.xml" value="0.25" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/recycler.xml" value="0.264" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/tolbar.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/activity_mainview.xml" value="0.15" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/activity_viewpager.xml" value="0.15" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_list.xml" value="0.13385416666666666" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_note.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/list_item.xml" value="0.13385416666666666" />
       </map>
     </option>
   </component>

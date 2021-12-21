@@ -1,4 +1,4 @@
-package com.example.test1
+package com.example.test1.note
 
 
 import android.content.Intent
@@ -11,14 +11,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.lifecycleScope
+import com.example.test1.R
+import com.example.test1.database.NoteData
+import com.example.test1.pager.NotePagerActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class NoteFragment : Fragment(), NoteView {
-
     private lateinit var presenter: NotePresenter
     private lateinit var title: EditText
     private lateinit var content: EditText
-    private lateinit var btnSave: Button
     private lateinit var btnShare: Button
 
     override fun onCreateView(
@@ -33,27 +38,19 @@ class NoteFragment : Fragment(), NoteView {
         val inputData = args?.getParcelable<NoteData>(NOTE_DATA)
         title = view.findViewById(R.id.title)
         content = view.findViewById(R.id.content)
-        btnSave = view.findViewById(R.id.buttonSave)
         btnShare = view.findViewById(R.id.buttonShare)
-        presenter = NotePresenter(this, inputData)
+        presenter = NotePresenter(this, inputData, requireContext())
 
-        btnSave.setOnClickListener {
-            presenter.saveNote((NoteData(title.text.toString(), content.text.toString())))
-        }
         btnShare.setOnClickListener {
-            presenter.shareNote(
-                (NoteData(title.text.toString(), content.text.toString()))
-            )
+            presenter.share()
         }
+        title.addTextChangedListener { presenter.updateTitle(it?.toString().orEmpty()) }
+        content.addTextChangedListener { presenter.updateText(it?.toString().orEmpty()) }
     }
 
-    companion object {
-
-        private const val NOTE_DATA: String = "Данные"
-
-        fun newInstance(noteData: NoteData): NoteFragment = NoteFragment().apply {
-            arguments = Bundle().apply { putParcelable(NOTE_DATA, noteData) }
-        }
+    override fun onResume() {
+        super.onResume()
+        (activity as? NotePagerActivity)?.currentFragment = this
     }
 
     override fun onSaveSuccess() {
@@ -65,21 +62,35 @@ class NoteFragment : Fragment(), NoteView {
     }
 
     private fun showNotification(msg_toast: Int) {
-        Toast.makeText(requireContext(), msg_toast, Toast.LENGTH_SHORT)
-            .show()
+        lifecycleScope.launch {
+            Toast.makeText(requireContext(), msg_toast, Toast.LENGTH_SHORT).show()
+        }
     }
 
-    override fun shareNote(noteData: NoteData) {
+    override fun share(noteData: NoteData) {
         val shareIntent = Intent(Intent.ACTION_SEND).apply {
             type = "text/plain"
-            putExtra(Intent.EXTRA_TEXT, "$noteData")
+            putExtra(Intent.EXTRA_TEXT, "${noteData.title}\n${noteData.text}")
         }
         startActivity(shareIntent)
     }
 
     override fun showNote(noteData: NoteData?) {
-
         title.setText(noteData?.title)
         content.setText(noteData?.text)
+    }
+
+    fun save() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            presenter.save()
+        }
+    }
+
+    companion object {
+        private const val NOTE_DATA: String = "Данные"
+
+        fun newInstance(noteData: NoteData): NoteFragment = NoteFragment().apply {
+            arguments = Bundle().apply { putParcelable(NOTE_DATA, noteData) }
+        }
     }
 }

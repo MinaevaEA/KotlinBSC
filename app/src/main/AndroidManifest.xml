@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.test1">
 
     <application
@@ -10,8 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Test1"
         android:fullBackupContent="true">
-        <activity android:name=".AboutActivity">
-        </activity>
+
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".pager.NotePagerActivity" />
 
         <activity
             android:name=".MainActivity"
