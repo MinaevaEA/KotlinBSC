@@ -38,6 +38,10 @@ class NotePagerActivity : FragmentActivity() {
         }
     }
 
+    fun continueSave() {
+        currentFragment?.save()
+    }
+
     companion object {
         private const val SELECTED_POSITION = "selectedPosition"
         private const val NOTES_LIST = "notesList"
@@ -53,9 +57,5 @@ class NotePagerActivity : FragmentActivity() {
 
             context.startActivity(intent)
         }
-    }
-
-    fun continueSave() {
-        currentFragment?.save()
     }
 }
