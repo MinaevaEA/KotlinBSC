@@ -14,4 +14,4 @@ data class NoteData(
     @ColumnInfo(name = "note_text") val text: String
 ) : Parcelable
 
- fun NoteData.isEmpty() = title.isEmpty() && text.isEmpty()
+fun NoteData.isEmpty() = title.isEmpty() && text.isEmpty()
