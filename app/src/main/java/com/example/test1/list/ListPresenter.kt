@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.onEach
 
 class ListPresenter(private val mainView: ListView, context: Context) {
     private var notes: List<NoteData> = listOf()
-    val database = NoteDatabase.getDatabase(context)
+    private val database = NoteDatabase.getDatabase(context)
 
     fun loadAllNotes() {
         mainView.showNoteList(loadNotes().onEach { notes = it })

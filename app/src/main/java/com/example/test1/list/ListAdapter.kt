@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.test1.R
 import com.example.test1.database.NoteData
 
-open class ListAdapter(
+class ListAdapter(
     private val notes: List<NoteData>,
     private val clickListener: (List<NoteData>, Int) -> Unit
 ) : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
