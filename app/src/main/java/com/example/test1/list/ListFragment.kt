@@ -52,7 +52,7 @@ class ListFragment : Fragment(), ListView {
             notes.collect {
                 adapter = ListAdapter(it, ::openNote)
                 val recyclerFragment: RecyclerView =
-                    binding.recyclerView //тут find
+                    binding.recyclerView
                 recyclerFragment.layoutManager = LinearLayoutManager(context)
                 recyclerFragment.adapter = adapter
             }
