@@ -5,43 +5,39 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test1.*
 import com.example.test1.database.NoteData
+import com.example.test1.databinding.FragmentListBinding
 import com.example.test1.pager.NotePagerActivity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class ListFragment : Fragment(), ListView {
+    private lateinit var  binding: FragmentListBinding
     private lateinit var presenter: ListPresenter
     private lateinit var adapter: ListAdapter
-    private lateinit var btnAbout: Button
-    private lateinit var btnCreateNote: ImageButton
-    private lateinit var toolbar: Toolbar
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_list, container, false) //recycler ok
+    ): View
+        = FragmentListBinding.inflate(inflater,container, false).also {
+         binding = it
+    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btnCreateNote = view.findViewById(R.id.add_note)
         presenter = ListPresenter(this, requireContext())
-        toolbar = view.findViewById(R.id.toolbarMain)
-        btnAbout = view.findViewById(R.id.about)
-        btnAbout.setOnClickListener {
+             binding.about.setOnClickListener {
             presenter.btnAboutActivityClick()
         }
-        btnCreateNote.setOnClickListener {
+        binding.addNote.setOnClickListener {
             presenter.createNote()
         }
         presenter.loadAllNotes()
@@ -56,7 +52,7 @@ class ListFragment : Fragment(), ListView {
             notes.collect {
                 adapter = ListAdapter(it, ::openNote)
                 val recyclerFragment: RecyclerView =
-                    view?.findViewById(R.id.recyclerView) as RecyclerView //ok
+                    binding.recyclerView //тут find
                 recyclerFragment.layoutManager = LinearLayoutManager(context)
                 recyclerFragment.adapter = adapter
             }

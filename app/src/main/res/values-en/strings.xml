@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">New application</string>
+    <string name="title">Title</string>
+    <string name="content">Enter your text</string>
+    <string name="buttonSave">OK</string>
+    <string name="buttonShare">Send</string>
+    <string name="msg_error">Fill in the empty field</string>
+    <string name="text">About</string>
+    <string name="save_msg">Save</string>
+    <string name="btn_about">About</string>
+    <string name="dialog_msg">Do you really want to save the note?</string>
+    <string name="exit">Exit</string>
+</resources>
