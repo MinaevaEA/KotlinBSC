@@ -6,66 +6,60 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test1.*
 import com.example.test1.database.NoteData
 import com.example.test1.databinding.FragmentListBinding
 import com.example.test1.pager.NotePagerActivity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
-class ListFragment : Fragment(), ListView {
-    private lateinit var  binding: FragmentListBinding
-    private lateinit var presenter: ListPresenter
+class ListFragment : Fragment() {
+    private lateinit var binding: FragmentListBinding
+    private lateinit var viewModel: AllNotesViewModel
     private lateinit var adapter: ListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View
-        = FragmentListBinding.inflate(inflater,container, false).also {
-         binding = it
+    ): View = FragmentListBinding.inflate(inflater, container, false).also {
+        binding = it
     }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        presenter = ListPresenter(this, requireContext())
-             binding.about.setOnClickListener {
-            presenter.btnAboutActivityClick()
+        viewModel = AllNotesViewModel(requireContext())
+        subscribeToViewModel()
+        binding.about.setOnClickListener {
+            viewModel.btnAboutActivityClick()
         }
         binding.addNote.setOnClickListener {
-            presenter.createNote()
+            viewModel.createNote()
         }
-        presenter.loadAllNotes()
+        viewModel.loadAllNotes()
     }
 
-    override fun openActivityAbout() {
-        startActivity(Intent(requireContext(), AboutActivity::class.java))
+    private fun showNoteList(notes: List<NoteData>) {
+        adapter = ListAdapter(notes, ::openNote)
+        val recyclerFragment: RecyclerView =
+            binding.recyclerView
+        recyclerFragment.layoutManager = LinearLayoutManager(context)
+        recyclerFragment.adapter = adapter
     }
 
-    override fun showNoteList(notes: Flow<List<NoteData>>) {
-        lifecycleScope.launch {
-            notes.collect {
-                adapter = ListAdapter(it, ::openNote)
-                val recyclerFragment: RecyclerView =
-                    binding.recyclerView
-                recyclerFragment.layoutManager = LinearLayoutManager(context)
-                recyclerFragment.adapter = adapter
-            }
+    private fun subscribeToViewModel() {
+        viewModel.notes.observe(requireActivity()) {
+            showNoteList(it)
         }
-    }
-
-    override fun onNoteOpen(notes: List<NoteData>, currentPosition: Int) {
-        context?.let {
-            NotePagerActivity.startActivity(it, notes, currentPosition)
+        viewModel.openNote.observe(requireActivity()) { (notes, currentPosition) ->
+            NotePagerActivity.startActivity(requireContext(), notes, currentPosition)
+        }
+        viewModel.openAbout.observe(requireActivity()) {
+            startActivity(Intent(requireContext(), AboutActivity::class.java))
         }
     }
 
     private fun openNote(notes: List<NoteData>, currentPosition: Int) {
-        presenter.openNote(notes, currentPosition)
+        viewModel.openNote(notes, currentPosition)
     }
 }

@@ -1,36 +1,36 @@
 package com.example.test1.note
 
 import android.content.Context
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import com.example.test1.database.isEmpty
 
-class NotePresenter(
-    private val noteView: NoteView,
-    private var noteData: NoteData?,
-    context: Context
-) {
-
+class NoteViewModel(context: Context) : ViewModel() {
+    val noteData = MutableLiveData<NoteData>()
     private val database = NoteDatabase.getDatabase(context)
-
-    init {
-        noteView.showNote(noteData)
+    val noteShare = MutableLiveData<NoteData>()
+    val noteEmpty = MutableLiveData<Unit>()
+    val saveSuccess = MutableLiveData<NoteData>()
+    fun initData(noteData: NoteData) {
+        this.noteData.postValue(noteData)
     }
 
     fun share() {
-        noteData?.let {
+        noteData.value?.let {
             if (it.isEmpty()) {
-                noteView.onNoteEmpty()
+                this.noteEmpty.postValue(Unit)
             } else {
-                noteView.share(it)
+                this.noteShare.postValue(it)
             }
         }
     }
 
     suspend fun save() {
-        noteData?.also {
+        noteData.value?.also {
             if (it.isEmpty()) {
-                noteView.onNoteEmpty()
+                this.noteEmpty.postValue(Unit)
             } else {
                 if (it.id > 0) {
                     database.noteDao().update(it)
@@ -39,28 +39,28 @@ class NotePresenter(
                         updateId(newNoteId)
                     }
                 }
-                noteView.onSaveSuccess()
+                this.saveSuccess.postValue(it)
             }
         }
     }
 
     fun updateTitle(title: String) {
-        noteData?.also {
-            noteData = it.copy(title = title)
+        noteData.value?.also {
+            noteData.value = it.copy(title = title)
         }
     }
 
     fun updateText(text: String) {
-        noteData?.also {
-            noteData = it.copy(text = text)
+        noteData.value?.also {
+            noteData.value = it.copy(text = text)
         }
     }
 
     private fun updateId(id: Long) {
-        noteData?.also {
-            noteData = it.copy(id = id)
+        noteData.value?.also {
+            noteData.value = it.copy(id = id)
         }
     }
-
 }
+
 
