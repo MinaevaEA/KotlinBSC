@@ -1,18 +1,19 @@
 package com.example.test1.note
 
-import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import com.example.test1.database.isEmpty
+import kotlinx.coroutines.launch
 
-class NoteViewModel(context: Context) : ViewModel() {
+class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
     val noteData = MutableLiveData<NoteData>()
-    private val database = NoteDatabase.getDatabase(context)
     val noteShare = MutableLiveData<NoteData>()
     val noteEmpty = MutableLiveData<Unit>()
     val saveSuccess = MutableLiveData<NoteData>()
+
     fun initData(noteData: NoteData) {
         this.noteData.postValue(noteData)
     }
@@ -28,6 +29,7 @@ class NoteViewModel(context: Context) : ViewModel() {
     }
 
     suspend fun save() {
+
         noteData.value?.also {
             if (it.isEmpty()) {
                 this.noteEmpty.postValue(Unit)
@@ -46,19 +48,32 @@ class NoteViewModel(context: Context) : ViewModel() {
 
     fun updateTitle(title: String) {
         noteData.value?.also {
-            noteData.value = it.copy(title = title)
+            noteData.value = it.copy(title = title).apply {
+                viewModelScope.launch {
+                    database.noteDao().update(it)
+                }
+            }
         }
     }
 
     fun updateText(text: String) {
         noteData.value?.also {
-            noteData.value = it.copy(text = text)
+            noteData.value = it.copy(text = text).apply {
+                viewModelScope.launch {
+                    database.noteDao().update(it)
+                }
+            }
         }
     }
 
     private fun updateId(id: Long) {
         noteData.value?.also {
-            noteData.value = it.copy(id = id)
+            noteData.value = it.copy(id = id).apply {
+                viewModelScope.launch {
+                    database.noteDao().update(it)
+
+                }
+            }
         }
     }
 }

@@ -13,7 +13,7 @@ class ListAdapter(
     private val clickListener: (List<NoteData>, Int) -> Unit
 ) : RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
 
-       class MyViewHolder(private var binding: ListItemBinding) :
+    class MyViewHolder(private var binding: ListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: NoteData, clickListener: View.OnClickListener) {
@@ -24,9 +24,10 @@ class ListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val binding= ListItemBinding.inflate(
+        val binding = ListItemBinding.inflate(
             LayoutInflater
-                .from(parent.context), parent, false)
+                .from(parent.context), parent, false
+        )
         return MyViewHolder(binding)
     }
 
@@ -36,5 +37,3 @@ class ListAdapter(
 
     override fun getItemCount(): Int = notes.size
 }
-
-

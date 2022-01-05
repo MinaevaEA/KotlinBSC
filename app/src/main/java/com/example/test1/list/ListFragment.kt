@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test1.*
+import com.example.test1.database.ConcreteNoteDatabase
 import com.example.test1.database.NoteData
 import com.example.test1.databinding.FragmentListBinding
 import com.example.test1.pager.NotePagerActivity
@@ -28,7 +29,7 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = AllNotesViewModel(requireContext())
+        viewModel = AllNotesViewModel(ConcreteNoteDatabase.getDatabase(requireContext()))
         subscribeToViewModel()
         binding.about.setOnClickListener {
             viewModel.btnAboutActivityClick()

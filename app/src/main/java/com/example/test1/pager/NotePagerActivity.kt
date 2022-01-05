@@ -10,15 +10,17 @@ import com.example.test1.note.DialogNoteFragment
 import com.example.test1.note.NoteFragment
 
 class NotePagerActivity : FragmentActivity() {
+    var currentFragment: NoteFragment? = null
+
     private lateinit var binding: ActivityViewpagerBinding
     private lateinit var adapter: PagerListAdapter
-    var currentFragment: NoteFragment? = null
+    private val startPosition by lazy { intent.getIntExtra(SELECTED_POSITION, 0) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityViewpagerBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val startPosition by lazy { intent.getIntExtra(SELECTED_POSITION, 0) }
+
         binding.viewpager.apply {
             val list = intent.getParcelableArrayListExtra(NOTES_LIST) ?: emptyList<NoteData>()
             this@NotePagerActivity.adapter = PagerListAdapter(list, this@NotePagerActivity)

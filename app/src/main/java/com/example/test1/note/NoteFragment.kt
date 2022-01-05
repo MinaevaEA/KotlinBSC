@@ -3,16 +3,16 @@ package com.example.test1.note
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.example.test1.R
+import com.example.test1.database.ConcreteNoteDatabase
 import com.example.test1.database.NoteData
 import com.example.test1.databinding.FragmentNoteBinding
 import com.example.test1.pager.NotePagerActivity
@@ -23,30 +23,6 @@ import kotlinx.coroutines.launch
 class NoteFragment : Fragment() {
     private lateinit var binding: FragmentNoteBinding
     private lateinit var viewModel: NoteViewModel
-    private val textChangedListener: TextWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-        }
-
-        override fun afterTextChanged(s: Editable?) {
-            viewModel.updateText(s?.toString().orEmpty())
-        }
-    }
-    private val titleChangedListener: TextWatcher = object : TextWatcher {
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-        }
-
-        override fun afterTextChanged(s: Editable?) {
-            viewModel.updateTitle(s?.toString().orEmpty())
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +36,7 @@ class NoteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val args = this.arguments
         val inputData = args?.getParcelable<NoteData>(NOTE_DATA)
-        viewModel = NoteViewModel(requireContext())
+        viewModel = NoteViewModel(ConcreteNoteDatabase.getDatabase(requireContext()))
         if (inputData != null) {
             viewModel.initData(inputData)
         }
@@ -68,8 +44,8 @@ class NoteFragment : Fragment() {
         binding.buttonShare.setOnClickListener {
             viewModel.share()
         }
-        //binding.title.addTextChangedListener { viewModel.updateTitle(it?.toString().orEmpty()) }
-        //binding.content.addTextChangedListener { viewModel.updateText(it?.toString().orEmpty()) }
+        binding.title.addTextChangedListener { viewModel.updateTitle(it?.toString().orEmpty()) }
+        binding.content.addTextChangedListener { viewModel.updateText(it?.toString().orEmpty()) }
     }
 
     override fun onResume() {
@@ -100,12 +76,12 @@ class NoteFragment : Fragment() {
     }
 
     private fun showNote(noteData: NoteData?) {
-        binding.content.removeTextChangedListener(textChangedListener)
-        binding.title.removeTextChangedListener(titleChangedListener)
-        binding.title.setText(noteData?.title)
-        binding.content.setText(noteData?.text)
-        binding.content.addTextChangedListener(textChangedListener)
-        binding.title.addTextChangedListener(titleChangedListener)
+        if (binding.title.text.toString() != noteData?.title) {
+            binding.title.setText(noteData?.title)
+        }
+        if (binding.content.text.toString() != noteData?.text) {
+            binding.content.setText(noteData?.text)
+        }
     }
 
     fun save() {
