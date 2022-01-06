@@ -17,8 +17,8 @@ class AllNotesViewModel(
     val openNote = MutableLiveData<Pair<List<NoteData>, Int>>()
     val openAbout = MutableLiveData<Unit>()
 
-    fun loadAllNotes(): Job {
-        return viewModelScope.launch {
+    fun loadAllNotes() {
+        viewModelScope.launch {
             loadNotes().collect {
                 notes.postValue(it)
             }
@@ -30,7 +30,7 @@ class AllNotesViewModel(
     }
 
     fun openNote(notes: List<NoteData>, currentPosition: Int) {
-        openNote.value = notes to currentPosition
+        openNote.postValue(notes to currentPosition)
     }
 
     fun createNote(): Job {

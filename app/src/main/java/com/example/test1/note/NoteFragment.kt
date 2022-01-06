@@ -35,7 +35,7 @@ class NoteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args = this.arguments
-        val inputData = args?.getParcelable<NoteData>(NOTE_DATA)
+        val inputData = args?.getSerializable(NOTE_DATA) as? NoteData
         viewModel = NoteViewModel(ConcreteNoteDatabase.getDatabase(requireContext()))
         if (inputData != null) {
             viewModel.initData(inputData)
@@ -109,7 +109,7 @@ class NoteFragment : Fragment() {
         private const val NOTE_DATA: String = "Данные"
 
         fun newInstance(noteData: NoteData): NoteFragment = NoteFragment().apply {
-            arguments = Bundle().apply { putParcelable(NOTE_DATA, noteData) }
+            arguments = Bundle().apply { putSerializable(NOTE_DATA, noteData) }
         }
     }
 }

@@ -50,7 +50,7 @@ class NotePagerActivity : FragmentActivity() {
             selectionPosition: Int
         ) {
             val intent = Intent(context, NotePagerActivity::class.java)
-            intent.putParcelableArrayListExtra(NOTES_LIST, ArrayList(notesList))
+            intent.putExtra(NOTES_LIST, ArrayList(notesList))
             intent.putExtra(SELECTED_POSITION, selectionPosition)
 
             context.startActivity(intent)
