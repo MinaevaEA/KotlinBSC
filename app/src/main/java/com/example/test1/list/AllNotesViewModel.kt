@@ -9,6 +9,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import java.lang.Exception
 
 class AllNotesViewModel(
     private val database: NoteDatabase
@@ -33,10 +34,10 @@ class AllNotesViewModel(
         openNote.postValue(notes to currentPosition)
     }
 
-    fun createNote(): Job {
-        return viewModelScope.launch {
-            val rawNote = NoteData(0, "", "")
+    fun createNote() {
+        viewModelScope.launch {
 
+            val rawNote = NoteData(0, "", "")
             val dao = database.noteDao()
             val newNote = rawNote.run {
                 copy(id = dao.insert(rawNote))
@@ -46,9 +47,9 @@ class AllNotesViewModel(
                 addAll(notes.value ?: listOf())
                 add(newNote)
             }
-
             notes.postValue(newNoteList)
             openNote(newNoteList, newNoteList.size - 1)
+
         }
     }
 
