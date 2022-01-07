@@ -2,10 +2,12 @@ package com.example.test1.note
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import com.example.test1.database.isEmpty
+import com.example.test1.list.AllNotesViewModel
 import kotlinx.coroutines.launch
 
 class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
@@ -29,7 +31,6 @@ class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
     }
 
     suspend fun save() {
-
         noteData.value?.also {
             if (it.isEmpty()) {
                 this.noteEmpty.postValue(Unit)
@@ -78,4 +79,12 @@ class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
     }
 }
 
+@Suppress("UNCHECKED_CAST")
+class NoteViewModelFactory(
+    private val database: NoteDatabase
+) : ViewModelProvider.NewInstanceFactory() {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        return AllNotesViewModel(database) as T
+    }
+}
 

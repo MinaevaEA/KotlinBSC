@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test1.*
@@ -17,6 +18,7 @@ import com.example.test1.pager.NotePagerActivity
 class ListFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
     private lateinit var viewModel: AllNotesViewModel
+    private lateinit var viewModelFactory: AllNotesViewModelFactory
     private lateinit var adapter: ListAdapter
 
     override fun onCreateView(
@@ -29,7 +31,9 @@ class ListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = AllNotesViewModel(ConcreteNoteDatabase.getDatabase(requireContext()))
+        viewModelFactory =
+            AllNotesViewModelFactory(ConcreteNoteDatabase.getDatabase(requireContext()))
+        viewModel = ViewModelProvider(this, viewModelFactory)[AllNotesViewModel::class.java]
         subscribeToViewModel()
         binding.about.setOnClickListener {
             viewModel.btnAboutActivityClick()

@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.test1.R
 import com.example.test1.database.ConcreteNoteDatabase
@@ -23,6 +24,7 @@ import kotlinx.coroutines.launch
 class NoteFragment : Fragment() {
     private lateinit var binding: FragmentNoteBinding
     private lateinit var viewModel: NoteViewModel
+    private lateinit var viewModelFactory: NoteViewModelFactory
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +38,8 @@ class NoteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val args = this.arguments
         val inputData = args?.getSerializable(NOTE_DATA) as? NoteData
-        viewModel = NoteViewModel(ConcreteNoteDatabase.getDatabase(requireContext()))
+        viewModelFactory = NoteViewModelFactory(ConcreteNoteDatabase.getDatabase(requireContext()))
+        viewModel = ViewModelProvider(this, viewModelFactory)[NoteViewModel::class.java]
         if (inputData != null) {
             viewModel.initData(inputData)
         }
