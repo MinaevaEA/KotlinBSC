@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.test1.SingleLiveEvent
 import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import kotlinx.coroutines.flow.Flow
@@ -13,9 +14,9 @@ import kotlinx.coroutines.flow.collect
 class AllNotesViewModel(
     private val database: NoteDatabase
 ) : ViewModel() {
-    val notes = MutableLiveData<List<NoteData>>()
-    val openNote = MutableLiveData<Pair<List<NoteData>, Int>>()
-    val openAbout = MutableLiveData<Unit>()
+    val notes = SingleLiveEvent<List<NoteData>>()
+    val openNote = SingleLiveEvent<Pair<List<NoteData>, Int>>()
+    val openAbout = SingleLiveEvent<Unit>()
 
     fun loadAllNotes() {
         viewModelScope.launch {
@@ -42,7 +43,7 @@ class AllNotesViewModel(
             }
 
             val newNoteList = mutableListOf<NoteData>().apply {
-                addAll(notes.value ?: listOf())
+                addAll(notes.value?: listOf())
                 add(newNote)
             }
             notes.postValue(newNoteList)

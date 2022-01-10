@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.android.libraries.places:places:2.5.0'
+
 
     //room
     def room_version = "2.3.0"

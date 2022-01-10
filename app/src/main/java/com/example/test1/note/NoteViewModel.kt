@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.test1.SingleLiveEvent
 import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import com.example.test1.database.isEmpty
@@ -11,10 +12,10 @@ import com.example.test1.list.AllNotesViewModel
 import kotlinx.coroutines.launch
 
 class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
-    val noteData = MutableLiveData<NoteData>()
+    val noteData = SingleLiveEvent<NoteData>()
     val noteShare = MutableLiveData<NoteData>()
-    val noteEmpty = MutableLiveData<Unit>()
-    val saveSuccess = MutableLiveData<NoteData>()
+    val noteEmpty = SingleLiveEvent<Unit>()
+    val saveSuccess = SingleLiveEvent<NoteData>()
 
     fun initData(noteData: NoteData) {
         this.noteData.postValue(noteData)
@@ -84,7 +85,7 @@ class NoteViewModelFactory(
     private val database: NoteDatabase
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AllNotesViewModel(database) as T
+        return NoteViewModel(database) as T
     }
 }
 
