@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.collect
 class AllNotesViewModel(
     private val database: NoteDatabase
 ) : ViewModel() {
-    val notes = SingleLiveEvent<List<NoteData>>()
+    val notes = MutableLiveData<List<NoteData>>()
     val openNote = SingleLiveEvent<Pair<List<NoteData>, Int>>()
     val openAbout = SingleLiveEvent<Unit>()
 
@@ -43,7 +43,7 @@ class AllNotesViewModel(
             }
 
             val newNoteList = mutableListOf<NoteData>().apply {
-                addAll(notes.value?: listOf())
+                addAll(notes.value ?: listOf())
                 add(newNote)
             }
             notes.postValue(newNoteList)

@@ -8,17 +8,18 @@ import com.example.test1.SingleLiveEvent
 import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import com.example.test1.database.isEmpty
-import com.example.test1.list.AllNotesViewModel
 import kotlinx.coroutines.launch
 
 class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
-    val noteData = SingleLiveEvent<NoteData>()
-    val noteShare = MutableLiveData<NoteData>()
+    val noteData = MutableLiveData<NoteData>()
+    val noteShare = SingleLiveEvent<NoteData>()
     val noteEmpty = SingleLiveEvent<Unit>()
     val saveSuccess = SingleLiveEvent<NoteData>()
 
     fun initData(noteData: NoteData) {
-        this.noteData.postValue(noteData)
+        if (this.noteData.value == null) {
+            this.noteData.postValue(noteData)
+        }
     }
 
     fun share() {
