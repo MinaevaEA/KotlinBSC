@@ -37,7 +37,7 @@ class AllNotesViewModelTest {
 
     @Test
     fun testLoadAllNotesMoreTwoNotes() = runBlocking(Dispatchers.Unconfined) {
-        val notes = listOf(NoteData(1, "title1", "text1"), NoteData(2, "title2", "text2"))
+        val notes = listOf(noteDataOne, noteDataTwo)
         val database: NoteDatabase = mockk()
         val noteDao: NoteDao = mockk()
         val viewModel = AllNotesViewModel(database)
@@ -55,7 +55,7 @@ class AllNotesViewModelTest {
 
     @Test
     fun testLoadAllNotesOneNote() = runBlocking(Dispatchers.Unconfined) {
-        val notes = listOf(NoteData(1, "title1", "text1"))
+        val notes = listOf(noteDataOne)
         val database: NoteDatabase = mockk()
         val noteDao: NoteDao = mockk()
         val viewModel = AllNotesViewModel(database)
@@ -90,13 +90,14 @@ class AllNotesViewModelTest {
     }
 
     @Test
-    fun testCreateNoteOneNotes() = runBlocking {
+    fun testCreateOneNote() = runBlocking {
         val database: NoteDatabase = mockk()
         val noteDao: NoteDao = mockk()
+        val noteId: Long = 2
         val newNote = NoteData(0, "", "")
-        val newNote2 = newNote.copy(id = 2)
+        val newNote2 = newNote.copy(id = noteId)
         every { database.noteDao() } returns noteDao
-        coEvery { noteDao.insert(newNote) } returns 2
+        coEvery { noteDao.insert(newNote) } returns noteId
         val viewModel = AllNotesViewModel(database)
 
         viewModel.createNote()
@@ -107,22 +108,22 @@ class AllNotesViewModelTest {
         }
         Assert.assertTrue(subscriptionOneNote)
 
-        var f = false
+        var subscriptionOpenNote = false
         viewModel.openNote.observeForever {
-            f = true
+            subscriptionOpenNote = true
             Assert.assertEquals(it, listOf(newNote2) to 0)
         }
-        Assert.assertTrue(f)
+        Assert.assertTrue(subscriptionOpenNote)
     }
 
     @Test
-    fun testCreateNoteMoreTwoNotes() = runBlocking {
-        val notes = listOf(NoteData(1, "title1", "text1"))
+    fun testCreateMoreTwoNotes() = runBlocking {
+        val notes = listOf(noteDataOne)
         val database: NoteDatabase = mockk()
         val noteDao: NoteDao = mockk()
         val newNote = NoteData(0, "", "")
         val newNote2 = newNote.copy(id = 2)
-        val testNotes = listOf(NoteData(1, "title1", "text1"), newNote2)
+        val testNotes = listOf(noteDataOne, newNote2)
         every { database.noteDao() } returns noteDao
         coEvery { noteDao.insert(newNote) } returns 2
         every { noteDao.getAll() } returns flowOf(notes)
@@ -159,32 +160,40 @@ class AllNotesViewModelTest {
     }
 
     @Test
-    fun testOpenNoteOneNotes() = runBlocking(Dispatchers.Unconfined) {
+    fun testOpenOneNote() = runBlocking(Dispatchers.Unconfined) {
         val currentPosition = 0
-        val notes: List<NoteData> = listOf(NoteData(0, "title1", "text2"))
+        val notes: List<NoteData> = listOf(noteDataOne)
         val database: NoteDatabase = mockk()
         val viewModel = AllNotesViewModel(database)
         viewModel.openNote(notes, currentPosition)
         var subscriptionOneNotes = false
         viewModel.openNote.observeForever {
             subscriptionOneNotes = true
-            Assert.assertEquals(it, notes to 0)
+            Assert.assertEquals(it, notes to currentPosition)
         }
         Assert.assertTrue(subscriptionOneNotes)
     }
 
     @Test
-    fun testOpenNoteMoreTwoNotes() = runBlocking(Dispatchers.Unconfined) {
+    fun testOpenMoreTwoNotes() = runBlocking(Dispatchers.Unconfined) {
         val notes: List<NoteData> =
-            listOf(NoteData(0, "title1", "text1"), NoteData(2, "title2", "text2"), NoteData(3, "title3", "text3"))
+            listOf(noteDataZero, noteDataTwo, noteDataThree)
+        val currentPosition = 1
         val database: NoteDatabase = mockk()
         val viewModel = AllNotesViewModel(database)
-        viewModel.openNote(notes, 1)
+        viewModel.openNote(notes, currentPosition)
         var subscriptionMoteTwoNotes = false
         viewModel.openNote.observeForever {
             subscriptionMoteTwoNotes = true
-            Assert.assertEquals(it, notes to 1)
+            Assert.assertEquals(it, notes to currentPosition)
         }
         Assert.assertTrue(subscriptionMoteTwoNotes)
+    }
+
+    companion object {
+        val noteDataZero = NoteData(0, "title0", "text0")
+        val noteDataOne = NoteData(1, "title1", "text1")
+        val noteDataTwo = NoteData(2, "title2", "text2")
+        val noteDataThree = NoteData(3, "title3", "text3")
     }
 }

@@ -1,8 +1,10 @@
 package com.example.test1.database
 
+import androidx.lifecycle.viewModelScope
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.coroutines.launch
 import java.io.Serializable
 
 @Entity(tableName = "notes")

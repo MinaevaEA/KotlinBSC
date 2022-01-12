@@ -10,7 +10,7 @@ import com.example.test1.database.NoteDatabase
 import com.example.test1.database.isEmpty
 import kotlinx.coroutines.launch
 
-class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
+class NoteViewModel(val database: NoteDatabase) : ViewModel() {
     val noteData = MutableLiveData<NoteData>()
     val noteShare = SingleLiveEvent<NoteData>()
     val noteEmpty = SingleLiveEvent<Unit>()
@@ -51,33 +51,27 @@ class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
 
     fun updateTitle(title: String) {
         noteData.value?.also {
-            noteData.value = it.copy(title = title).apply {
-                viewModelScope.launch {
-                    database.noteDao().update(it)
-                }
-            }
+            noteData.value = it.copy(title = title).dataBaseUpdate()
         }
     }
 
     fun updateText(text: String) {
         noteData.value?.also {
-            noteData.value = it.copy(text = text).apply {
-                viewModelScope.launch {
-                    database.noteDao().update(it)
-                }
-            }
+            noteData.value = it.copy(text = text).dataBaseUpdate()
         }
     }
 
     private fun updateId(id: Long) {
         noteData.value?.also {
-            noteData.value = it.copy(id = id).apply {
-                viewModelScope.launch {
-                    database.noteDao().update(it)
-
-                }
-            }
+            noteData.value = it.copy(id = id).dataBaseUpdate()
         }
+    }
+
+    private fun NoteData.dataBaseUpdate(): NoteData {
+        viewModelScope.launch {
+            database.noteDao().update(this@dataBaseUpdate)
+        }
+        return this
     }
 }
 
@@ -85,8 +79,7 @@ class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
 class NoteViewModelFactory(
     private val database: NoteDatabase
 ) : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return NoteViewModel(database) as T
-    }
+    override fun <T : ViewModel> create(modelClass: Class<T>): T =
+        NoteViewModel(database) as T
 }
 

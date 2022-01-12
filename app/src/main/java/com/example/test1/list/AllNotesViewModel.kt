@@ -27,7 +27,7 @@ class AllNotesViewModel(
     }
 
     fun btnAboutActivityClick() {
-        openAbout.value = Unit
+        openAbout.call()
     }
 
     fun openNote(notes: List<NoteData>, currentPosition: Int) {
@@ -58,7 +58,6 @@ class AllNotesViewModel(
 class AllNotesViewModelFactory(
     private val database: NoteDatabase
 ) : ViewModelProvider.NewInstanceFactory() {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return AllNotesViewModel(database) as T
-    }
+    override fun <T : ViewModel> create(modelClass: Class<T>): T =
+        AllNotesViewModel(database) as T
 }
