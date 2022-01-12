@@ -122,10 +122,11 @@ class AllNotesViewModelTest {
         val database: NoteDatabase = mockk()
         val noteDao: NoteDao = mockk()
         val newNote = NoteData(0, "", "")
-        val newNote2 = newNote.copy(id = 2)
+        val newNote2Id: Long = 2
+        val newNote2 = newNote.copy(id = newNote2Id)
         val testNotes = listOf(noteDataOne, newNote2)
         every { database.noteDao() } returns noteDao
-        coEvery { noteDao.insert(newNote) } returns 2
+        coEvery { noteDao.insert(newNote) } returns newNote2Id
         every { noteDao.getAll() } returns flowOf(notes)
 
         val viewModel = AllNotesViewModel(database)
@@ -142,7 +143,7 @@ class AllNotesViewModelTest {
         var subscriptionOpenNote = false
         viewModel.openNote.observeForever {
             subscriptionOpenNote = true
-            Assert.assertEquals(it, testNotes to 1)
+            Assert.assertEquals(it, testNotes to notes.size)
         }
         Assert.assertTrue(subscriptionOpenNote)
     }
