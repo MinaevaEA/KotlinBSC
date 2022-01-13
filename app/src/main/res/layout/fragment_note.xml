@@ -4,9 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".note.NoteFragment">
+    tools:context=".note.NoteFragment"
+    >
 
     <EditText
+        style="@style/EditNote"
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,15 +16,19 @@
         tools:ignore="Autofill,TextFields" />
 
     <EditText
+        style="@style/EditNote"
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/content"
         android:inputType="textMultiLine"
+        android:gravity="top"
         android:maxLines="10"
+
         tools:ignore="Autofill,TextFields" />
 
     <Button
+        style="@style/ButtonGeneral.Button"
         android:id="@+id/buttonShare"
         android:layout_width="150dp"
         android:layout_height="wrap_content"

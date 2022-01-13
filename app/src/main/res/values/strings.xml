@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">New application</string>
+    <string name="app_name">Заметки</string>
 
     <string name="title">Заголовок</string>
     <string name="content">Введите текст</string>

@@ -192,9 +192,9 @@ class AllNotesViewModelTest {
     }
 
     companion object {
-        val noteDataZero = NoteData(0, "title0", "text0")
-        val noteDataOne = NoteData(1, "title1", "text1")
-        val noteDataTwo = NoteData(2, "title2", "text2")
-        val noteDataThree = NoteData(3, "title3", "text3")
+        val noteDataZero = NoteData(1, "title1", "text1")
+        val noteDataOne = NoteData(2, "title2", "text2")
+        val noteDataTwo = NoteData(3, "title3", "text3")
+        val noteDataThree = NoteData(4, "title4", "text4")
     }
 }

@@ -3,12 +3,10 @@ package com.example.test1.note
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
 import com.example.test1.SingleLiveEvent
 import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import com.example.test1.database.isEmpty
-import kotlinx.coroutines.launch
 
 class NoteViewModel(val database: NoteDatabase) : ViewModel() {
     val noteData = MutableLiveData<NoteData>()
@@ -51,27 +49,20 @@ class NoteViewModel(val database: NoteDatabase) : ViewModel() {
 
     fun updateTitle(title: String) {
         noteData.value?.also {
-            noteData.value = it.copy(title = title).dataBaseUpdate()
+            noteData.value = it.copy(title = title)
         }
     }
 
     fun updateText(text: String) {
         noteData.value?.also {
-            noteData.value = it.copy(text = text).dataBaseUpdate()
+            noteData.value = it.copy(text = text)
         }
     }
 
     private fun updateId(id: Long) {
         noteData.value?.also {
-            noteData.value = it.copy(id = id).dataBaseUpdate()
+            noteData.value = it.copy(id = id)
         }
-    }
-
-    private fun NoteData.dataBaseUpdate(): NoteData {
-        viewModelScope.launch {
-            database.noteDao().update(this@dataBaseUpdate)
-        }
-        return this
     }
 }
 
