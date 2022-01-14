@@ -4,33 +4,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".note.NoteFragment"
-    >
+    android:weightSum="3"
+    tools:context=".note.NoteFragment">
 
     <EditText
-        style="@style/EditNote"
         android:id="@+id/title"
+        style="@style/EditNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/title"
         tools:ignore="Autofill,TextFields" />
 
     <EditText
-        style="@style/EditNote"
         android:id="@+id/content"
+        style="@style/EditNote"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:gravity="top"
         android:hint="@string/content"
         android:inputType="textMultiLine"
-        android:gravity="top"
         android:maxLines="10"
-
         tools:ignore="Autofill,TextFields" />
 
     <Button
-        style="@style/ButtonGeneral.Button"
         android:id="@+id/buttonShare"
-        android:layout_width="150dp"
+        style="@style/ButtonGeneral.Button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:text="@string/buttonShare" />
 </LinearLayout>
