@@ -1,16 +1,16 @@
 <resources>
-    <string name="app_name">New application</string>
+    <string name="app_name">Заметки</string>
 
     <string name="title">Заголовок</string>
     <string name="content">Введите текст</string>
     <string name="buttonSave">ОК</string>
-    <string name="buttonActivity">Activity</string>
+    <string name="buttonActivity" translatable="false">Activity</string>
     <string name="buttonShare">Отправить</string>
     <string name="msg_error">Заполните пустое поле</string>
     <string name="text">О приложении</string>
-    <string name="text2">Тело списка</string>
+    <string name="text2" translatable="false">Тело списка</string>
     <string name="save_msg">Сохранено</string>
-    <string name="btn_about">About</string>
     <string name="dialog_msg">Вы действительно хотите сохранить заметку?</string>
     <string name="exit">Отмена</string>
+    <string name="btn_about">О приложении</string>
 </resources>

@@ -5,71 +5,70 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test1.*
+import com.example.test1.database.ConcreteNoteDatabase
 import com.example.test1.database.NoteData
+import com.example.test1.databinding.FragmentListBinding
 import com.example.test1.pager.NotePagerActivity
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
-class ListFragment : Fragment(), ListView {
-    private lateinit var presenter: ListPresenter
+class ListFragment : Fragment() {
+    private lateinit var binding: FragmentListBinding
+    private lateinit var viewModel: AllNotesViewModel
+    private lateinit var viewModelFactory: AllNotesViewModelFactory
     private lateinit var adapter: ListAdapter
-    private lateinit var btnAbout: Button
-    private lateinit var btnCreateNote: ImageButton
-    private lateinit var toolbar: Toolbar
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = inflater.inflate(R.layout.fragment_list, container, false) //recycler ok
+    ): View = FragmentListBinding.inflate(inflater, container, false).also {
+        binding = it
+    }.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        btnCreateNote = view.findViewById(R.id.add_note)
-        presenter = ListPresenter(this, requireContext())
-        toolbar = view.findViewById(R.id.toolbarMain)
-        btnAbout = view.findViewById(R.id.about)
-        btnAbout.setOnClickListener {
-            presenter.btnAboutActivityClick()
+        viewModelFactory =
+            AllNotesViewModelFactory(ConcreteNoteDatabase.getDatabase(requireContext()))
+        viewModel = ViewModelProvider(this, viewModelFactory)[AllNotesViewModel::class.java]
+        subscribeToViewModel()
+        binding.about.setOnClickListener {
+            viewModel.btnAboutActivityClick()
         }
-        btnCreateNote.setOnClickListener {
-            presenter.createNote()
-        }
-        presenter.loadAllNotes()
-    }
-
-    override fun openActivityAbout() {
-        startActivity(Intent(requireContext(), AboutActivity::class.java))
-    }
-
-    override fun showNoteList(notes: Flow<List<NoteData>>) {
-        lifecycleScope.launch {
-            notes.collect {
-                adapter = ListAdapter(it, ::openNote)
-                val recyclerFragment: RecyclerView =
-                    view?.findViewById(R.id.recyclerView) as RecyclerView //ok
-                recyclerFragment.layoutManager = LinearLayoutManager(context)
-                recyclerFragment.adapter = adapter
-            }
+        binding.addNote.setOnClickListener {
+            viewModel.createNote()
         }
     }
 
-    override fun onNoteOpen(notes: List<NoteData>, currentPosition: Int) {
-        context?.let {
-            NotePagerActivity.startActivity(it, notes, currentPosition)
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadAllNotes()
+    }
+
+    private fun showNoteList(notes: List<NoteData>) {
+        adapter = ListAdapter(notes, ::openNote)
+        val recyclerFragment: RecyclerView =
+            binding.recyclerView
+        recyclerFragment.layoutManager = LinearLayoutManager(context)
+        recyclerFragment.adapter = adapter
+    }
+
+    private fun subscribeToViewModel() {
+        viewModel.notes.observe(requireActivity()) {
+            showNoteList(it)
+        }
+        viewModel.openNote.observe(requireActivity()) { (notes, currentPosition) ->
+            NotePagerActivity.startActivity(requireContext(), notes, currentPosition)
+        }
+        viewModel.openAbout.observe(requireActivity()) {
+            startActivity(Intent(requireContext(), AboutActivity::class.java))
         }
     }
 
     private fun openNote(notes: List<NoteData>, currentPosition: Int) {
-        presenter.openNote(notes, currentPosition)
+        viewModel.openNote(notes, currentPosition)
     }
 }

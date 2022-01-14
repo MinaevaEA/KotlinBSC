@@ -3,33 +3,31 @@ package com.example.test1.pager
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageButton
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.FragmentActivity
-import androidx.viewpager2.widget.ViewPager2
-import com.example.test1.R
 import com.example.test1.database.NoteData
+import com.example.test1.databinding.ActivityViewpagerBinding
 import com.example.test1.note.DialogNoteFragment
 import com.example.test1.note.NoteFragment
 
 class NotePagerActivity : FragmentActivity() {
-    private lateinit var viewPager: ViewPager2
-    private lateinit var toolbar: Toolbar
-    private lateinit var adapter: PagerListAdapter
     var currentFragment: NoteFragment? = null
+
+    private lateinit var binding: ActivityViewpagerBinding
+    private lateinit var adapter: PagerListAdapter
+    private val startPosition by lazy { intent.getIntExtra(SELECTED_POSITION, 0) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_viewpager)
-        val startPosition by lazy { intent.getIntExtra(SELECTED_POSITION, 0) }
-        toolbar = findViewById(R.id.toolbar)
-        viewPager = findViewById<ViewPager2>(R.id.viewpager).apply {
+        binding = ActivityViewpagerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.viewpager.apply {
             val list = intent.getParcelableArrayListExtra(NOTES_LIST) ?: emptyList<NoteData>()
             this@NotePagerActivity.adapter = PagerListAdapter(list, this@NotePagerActivity)
             adapter = this@NotePagerActivity.adapter
             setCurrentItem(startPosition, false)
         }
-        findViewById<ImageButton>(R.id.buttonSave).also {
+        binding.buttonSave.also {
             it.setOnClickListener {
                 val openDialog = DialogNoteFragment()
                 val fragmentManager = this@NotePagerActivity.supportFragmentManager
@@ -52,7 +50,7 @@ class NotePagerActivity : FragmentActivity() {
             selectionPosition: Int
         ) {
             val intent = Intent(context, NotePagerActivity::class.java)
-            intent.putParcelableArrayListExtra(NOTES_LIST, ArrayList(notesList))
+            intent.putExtra(NOTES_LIST, ArrayList(notesList))
             intent.putExtra(SELECTED_POSITION, selectionPosition)
 
             context.startActivity(intent)

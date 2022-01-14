@@ -10,7 +10,7 @@ import com.example.test1.pager.NotePagerActivity
 class DialogNoteFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         return requireActivity().let {
-            val builder = AlertDialog.Builder(it)
+            val builder = AlertDialog.Builder(it,R.style.Dialog)
             builder
                 .setMessage(R.string.dialog_msg)
                 .setNegativeButton(R.string.exit) { dialog, _ ->

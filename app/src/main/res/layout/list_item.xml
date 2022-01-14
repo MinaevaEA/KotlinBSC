@@ -2,23 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:id="@+id/noteContainer"
+    style="@style/ListNotes"
+    android:layout_marginTop="15dp"
+    >
     <TextView
         android:id="@+id/title"
+        style="@style/TitleViewNote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
         android:text="@string/title"
-        android:textSize="@dimen/title_size" />
+
+         />
 
     <TextView
         android:id="@+id/text"
+        style="@style/TitleViewNote.TextViewNote"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/text2"
-        android:textSize="@dimen/content_size"
-
         />
 
 </LinearLayout>

@@ -16,19 +16,21 @@
 
         <ImageButton
             android:id="@+id/add_note"
+            style="@style/ButtonGeneral"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             app:srcCompat="@android:drawable/ic_input_add"
             tools:ignore="ContentDescription" />
-    </androidx.appcompat.widget.Toolbar>
 
-    <Button
-        android:id="@+id/about"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btn_about"
-        tools:ignore="MissingConstraints" />
+        <ImageButton
+            android:id="@+id/about"
+            style="@style/ButtonGeneral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/stat_sys_warning"
+            tools:ignore="ContentDescription"/>
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"

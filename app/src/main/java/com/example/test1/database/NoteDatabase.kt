@@ -5,23 +5,28 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-
 @Database(entities = [NoteData::class], version = 1)
-abstract class NoteDatabase : RoomDatabase() {
-    abstract fun noteDao(): NoteDao
+abstract class ConcreteNoteDatabase : RoomDatabase(), NoteDatabase {
+    abstract override fun noteDao(): NoteDao
 
     companion object {
         @Volatile
         private var INSTANCE: NoteDatabase? = null
+
         fun getDatabase(context: Context): NoteDatabase =
             INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    NoteDatabase::class.java,
+                    ConcreteNoteDatabase::class.java,
                     "database"
                 ).build()
+
                 INSTANCE = instance
                 instance
             }
     }
+}
+
+interface NoteDatabase {
+    fun noteDao(): NoteDao
 }

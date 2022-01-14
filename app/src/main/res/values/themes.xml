@@ -1,16 +1,48 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.Test1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Notes" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/blue_100</item>
+        <item name="colorPrimaryVariant">@color/blue_200</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/design_default_color_background</item>
+        <item name="android:windowBackground">@color/places_ui_default_primary</item>
     </style>
+    <style name="ListNotes">
+        <item name="android:background">@drawable/light_round</item>
+    </style>
+        <style name="ButtonGeneral">
+        <item name="android:background">@null</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="ButtonGeneral.Button">
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:background">@drawable/light_round</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TitleViewNote">
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:paddingBottom">5dp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/title_size</item>
+    </style>
+
+    <style name="TitleViewNote.TextViewNote">
+        <item name="android:textSize">@dimen/content_size</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+
+    <style name="EditNote">
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+    <style name="Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/places_autocomplete_fullscreen_background</item>
+        <item name="android:textColor">@color/blue_100</item>
+    </style>
+
 </resources>
