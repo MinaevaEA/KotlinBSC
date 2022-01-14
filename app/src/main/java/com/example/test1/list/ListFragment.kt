@@ -41,6 +41,10 @@ class ListFragment : Fragment() {
         binding.addNote.setOnClickListener {
             viewModel.createNote()
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.loadAllNotes()
     }
 

@@ -8,7 +8,7 @@ import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import com.example.test1.database.isEmpty
 
-class NoteViewModel(val database: NoteDatabase) : ViewModel() {
+class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
     val noteData = MutableLiveData<NoteData>()
     val noteShare = SingleLiveEvent<NoteData>()
     val noteEmpty = SingleLiveEvent<Unit>()
@@ -49,13 +49,17 @@ class NoteViewModel(val database: NoteDatabase) : ViewModel() {
 
     fun updateTitle(title: String) {
         noteData.value?.also {
-            noteData.value = it.copy(title = title)
+            if (title != it.title) {
+                noteData.value = it.copy(title = title)
+            }
         }
     }
 
     fun updateText(text: String) {
         noteData.value?.also {
-            noteData.value = it.copy(text = text)
+            if (text != it.text) {
+                noteData.value = it.copy(text = text)
+            }
         }
     }
 

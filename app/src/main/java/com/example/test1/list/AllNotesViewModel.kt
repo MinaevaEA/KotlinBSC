@@ -35,20 +35,13 @@ class AllNotesViewModel(
     }
 
     fun createNote() {
-        viewModelScope.launch {
-            val rawNote = NoteData(0, "", "")
-            val dao = database.noteDao()
-            val newNote = rawNote.run {
-                copy(id = dao.insert(rawNote))
-            }
-
-            val newNoteList = mutableListOf<NoteData>().apply {
-                addAll(notes.value ?: listOf())
-                add(newNote)
-            }
-            notes.postValue(newNoteList)
-            openNote(newNoteList, newNoteList.size - 1)
+        val newNote = NoteData(0, "", "")
+        val newNoteList = mutableListOf<NoteData>().apply {
+            addAll(notes.value ?: listOf())
+            add(newNote)
         }
+        notes.postValue(newNoteList)
+        openNote(newNoteList, newNoteList.size - 1)
     }
 
     private fun loadNotes(): Flow<List<NoteData>> = database.noteDao().getAll()
