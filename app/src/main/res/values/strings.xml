@@ -6,6 +6,7 @@
     <string name="buttonSave">ОК</string>
     <string name="buttonActivity" translatable="false">Activity</string>
     <string name="buttonShare">Отправить</string>
+    <string name="buttonGetNote">Получить заметку из сети</string>
     <string name="msg_error">Заполните пустое поле</string>
     <string name="text">О приложении</string>
     <string name="text2" translatable="false">Тело списка</string>

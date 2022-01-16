@@ -1,15 +1,21 @@
 package com.example.test1.list
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.test1.NoteInteractor
 import com.example.test1.SingleLiveEvent
 import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class AllNotesViewModel(
     private val database: NoteDatabase
@@ -42,6 +48,29 @@ class AllNotesViewModel(
         }
         notes.postValue(newNoteList)
         openNote(newNoteList, newNoteList.size - 1)
+    }
+
+    fun downloadNote() {
+        NoteInteractor().getNote().enqueue(object : Callback<NoteData> {
+            override fun onResponse(call: Call<NoteData>, response: Response<NoteData>) {
+                val newNote = NoteData(
+                    response.body()?.id ?: 0,
+                    response.body()?.title ?: "",
+                    response.body()?.text ?: ""
+                )
+                val newNoteList = mutableListOf<NoteData>().apply {
+                    addAll(notes.value ?: listOf())
+                    add(newNote)
+                }
+                notes.postValue(newNoteList)
+                openNote(newNoteList, newNoteList.size - 1)
+                Log.d(ContentValues.TAG, "+")
+            }
+
+            override fun onFailure(call: Call<NoteData>, t: Throwable?) {
+                Log.d(ContentValues.TAG, "error")
+            }
+        })
     }
 
     private fun loadNotes(): Flow<List<NoteData>> = database.noteDao().getAll()

@@ -15,6 +15,7 @@ import com.example.test1.database.NoteData
 import com.example.test1.databinding.FragmentListBinding
 import com.example.test1.pager.NotePagerActivity
 
+
 class ListFragment : Fragment() {
     private lateinit var binding: FragmentListBinding
     private lateinit var viewModel: AllNotesViewModel
@@ -40,6 +41,9 @@ class ListFragment : Fragment() {
         }
         binding.addNote.setOnClickListener {
             viewModel.createNote()
+        }
+        binding.buttonDownloadNote.setOnClickListener {
+            viewModel.downloadNote()
         }
     }
 
