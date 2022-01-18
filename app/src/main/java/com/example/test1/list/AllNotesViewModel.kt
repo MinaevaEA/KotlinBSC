@@ -1,7 +1,6 @@
 package com.example.test1.list
 
-import android.content.ContentValues
-import android.util.Log
+
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -13,9 +12,7 @@ import com.example.test1.database.NoteDatabase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
 
 class AllNotesViewModel(
     private val database: NoteDatabase
@@ -42,35 +39,24 @@ class AllNotesViewModel(
 
     fun createNote() {
         val newNote = NoteData(0, "", "")
+        addNote(newNote)
+    }
+
+    fun downloadNote() {
+        viewModelScope.launch {
+            val noteData: NoteData = NoteInteractor().getNote()
+            val newNote = NoteData(0, noteData.title, noteData.text)
+            addNote(newNote)
+        }
+    }
+
+    private fun addNote(newNote: NoteData) {
         val newNoteList = mutableListOf<NoteData>().apply {
             addAll(notes.value ?: listOf())
             add(newNote)
         }
         notes.postValue(newNoteList)
         openNote(newNoteList, newNoteList.size - 1)
-    }
-
-    fun downloadNote() {
-        NoteInteractor().getNote().enqueue(object : Callback<NoteData> {
-            override fun onResponse(call: Call<NoteData>, response: Response<NoteData>) {
-                val newNote = NoteData(
-                    response.body()?.id ?: 0,
-                    response.body()?.title ?: "",
-                    response.body()?.text ?: ""
-                )
-                val newNoteList = mutableListOf<NoteData>().apply {
-                    addAll(notes.value ?: listOf())
-                    add(newNote)
-                }
-                notes.postValue(newNoteList)
-                openNote(newNoteList, newNoteList.size - 1)
-                Log.d(ContentValues.TAG, "+")
-            }
-
-            override fun onFailure(call: Call<NoteData>, t: Throwable?) {
-                Log.d(ContentValues.TAG, "error")
-            }
-        })
     }
 
     private fun loadNotes(): Flow<List<NoteData>> = database.noteDao().getAll()

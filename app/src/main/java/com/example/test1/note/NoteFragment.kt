@@ -59,11 +59,6 @@ class NoteFragment : Fragment() {
 
     private fun onSaveSuccess() {
         showNotification(R.string.save_msg)
-        /*   activity?.sendBroadcast(Intent().apply {
-               action = ACTION
-               putExtra(NOTE_DATA, noteData)
-           },PERM_PRIVATE)
-   */
     }
 
     private fun onNoteEmpty() {
@@ -116,10 +111,8 @@ class NoteFragment : Fragment() {
     }
 
     companion object {
-        private const val NOTE_DATA: String = "Данные"
+        private const val NOTE_DATA: String = "note_text"
 
-        // private const val ACTION = "com.example.test1.show_note"
-        // private const val PERM_PRIVATE = "com.example.test1.PRIVATE"
         fun newInstance(noteData: NoteData): NoteFragment = NoteFragment().apply {
             arguments = Bundle().apply { putSerializable(NOTE_DATA, noteData) }
         }
