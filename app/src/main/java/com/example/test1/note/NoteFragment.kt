@@ -57,8 +57,12 @@ class NoteFragment : Fragment() {
         (activity as? NotePagerActivity)?.currentFragment = this
     }
 
-    private fun onSaveSuccess() {
+    private fun onSaveSuccess(title: String, text: String) {
         showNotification(R.string.save_msg)
+        activity?.sendBroadcast(Intent().apply {
+            action = ACTION
+            putExtra(NOTE_DATA, "${title}\n${text}")
+        })
     }
 
     private fun onNoteEmpty() {
@@ -105,14 +109,14 @@ class NoteFragment : Fragment() {
             onNoteEmpty()
         }
         viewModel.saveSuccess.observe(requireActivity()) {
-            onSaveSuccess()
+            onSaveSuccess(it.title,it.text)
         }
 
     }
 
     companion object {
         private const val NOTE_DATA: String = "note_text"
-
+        private const val ACTION = "com.example.test1.ACTION_SAVING"
         fun newInstance(noteData: NoteData): NoteFragment = NoteFragment().apply {
             arguments = Bundle().apply { putSerializable(NOTE_DATA, noteData) }
         }
