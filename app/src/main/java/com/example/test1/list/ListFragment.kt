@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test1.*
@@ -14,6 +16,7 @@ import com.example.test1.database.ConcreteNoteDatabase
 import com.example.test1.database.NoteData
 import com.example.test1.databinding.FragmentListBinding
 import com.example.test1.pager.NotePagerActivity
+import kotlinx.coroutines.launch
 
 
 class ListFragment : Fragment() {
@@ -60,6 +63,12 @@ class ListFragment : Fragment() {
         recyclerFragment.adapter = adapter
     }
 
+    private fun showNotification(msg_toast: Int) {
+        lifecycleScope.launch {
+            Toast.makeText(requireContext(), msg_toast, Toast.LENGTH_SHORT).show()
+        }
+    }
+
     private fun subscribeToViewModel() {
         viewModel.notes.observe(requireActivity()) {
             showNoteList(it)
@@ -69,6 +78,9 @@ class ListFragment : Fragment() {
         }
         viewModel.openAbout.observe(requireActivity()) {
             startActivity(Intent(requireContext(), AboutActivity::class.java))
+        }
+        viewModel.errorDownloadNote.observe(requireActivity()){
+            showNotification(R.string.msg_error_download_note)
         }
     }
 

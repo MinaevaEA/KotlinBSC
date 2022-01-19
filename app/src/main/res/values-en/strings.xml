@@ -13,4 +13,5 @@
     <string name="dialog_msg">Do you really want to save the note?</string>
     <string name="exit">Exit</string>
     <string name="buttonGetNote">Get note from network</string>
+    <string name="msg_error_download_note">Unable to download note! Connect to the Internet</string>
 </resources>

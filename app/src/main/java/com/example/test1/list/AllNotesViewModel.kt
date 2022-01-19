@@ -1,10 +1,7 @@
 package com.example.test1.list
 
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.test1.NoteInteractor
 import com.example.test1.SingleLiveEvent
 import com.example.test1.database.NoteData
@@ -12,6 +9,7 @@ import com.example.test1.database.NoteDatabase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import java.lang.Exception
 
 
 class AllNotesViewModel(
@@ -20,6 +18,7 @@ class AllNotesViewModel(
     val notes = MutableLiveData<List<NoteData>>()
     val openNote = SingleLiveEvent<Pair<List<NoteData>, Int>>()
     val openAbout = SingleLiveEvent<Unit>()
+    val errorDownloadNote = SingleLiveEvent<Unit>()
 
     fun loadAllNotes() {
         viewModelScope.launch {
@@ -44,9 +43,14 @@ class AllNotesViewModel(
 
     fun downloadNote() {
         viewModelScope.launch {
-            val noteData: NoteData = NoteInteractor().getNote()
-            val newNote = NoteData(0, noteData.title, noteData.text)
-            addNote(newNote)
+            try {
+                val noteData: NoteData = NoteInteractor().getNote()
+                val noteId: Long = 0
+                val newNote = noteData.copy(id = noteId)
+                addNote(newNote)
+            } catch (e: Exception) {
+                errorDownloadNote.postValue(Unit)
+            }
         }
     }
 

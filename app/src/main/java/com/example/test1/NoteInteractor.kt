@@ -16,7 +16,6 @@ class NoteInteractor {
                     .create()
             )
         )
-
         .build().create(NoteApi::class.java).getNote()
 
     companion object {

@@ -63,7 +63,7 @@ class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
         }
     }
 
-    private fun updateId(id: Long) {
+     private fun updateId(id: Long) {
         noteData.value?.also {
             noteData.value = it.copy(id = id)
         }
