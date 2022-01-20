@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
+    <!-- color general. -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="blue">#4fa5d5</color>
+
+    <!-- color light. -->
     <color name="purple_500">#FF6200EE</color>
     <color name="blue_100">#3CA8CA</color>
+    <color name="blue_300">#94D1E4</color>
+
+    <!-- color night. -->
     <color name="blue_200">#1263ED</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="purple_600">#2B2EE4</color>
     <color name="background_color">#2A3B5C</color>
     <color name="background_color_note">#1B315E</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-
-
-    <!-- color night. -->
-
 </resources>

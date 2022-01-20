@@ -8,6 +8,7 @@ import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import com.example.test1.database.isEmpty
 
+
 class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
     val noteData = MutableLiveData<NoteData>()
     val noteShare = SingleLiveEvent<NoteData>()
@@ -65,7 +66,7 @@ class NoteViewModel(private val database: NoteDatabase) : ViewModel() {
 
     private fun updateId(id: Long) {
         noteData.value?.also {
-            noteData.value = it.copy(id = id)
+            noteData.postValue(it.copy(id = id))
         }
     }
 }

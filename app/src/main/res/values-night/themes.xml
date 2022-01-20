@@ -8,17 +8,22 @@
         <item name="materialButtonStyle">@style/ButtonGeneral</item>
         <item name="android:windowBackground">@color/background_color</item>
     </style>
-<style name="ListNotes">
-    <item name="android:background">@drawable/round</item>
-</style>
+
+    <style name="ListNotes">
+        <item name="android:background">@drawable/round_night</item>
+        <item name="android:layout_marginLeft">5dp</item>
+        <item name="android:layout_marginRight">5dp</item>
+    </style>
+
     <style name="ButtonGeneral">
         <item name="android:background">@null</item>
         <item name="android:padding">10dp</item>
     </style>
 
     <style name="ButtonGeneral.Button">
+        <item name="android:layout_marginRight">10dp</item>
         <item name="android:layout_marginLeft">10dp</item>
-        <item name="android:background">@drawable/round</item>
+        <item name="android:background">@color/blue</item>
     </style>
 
     <style name="TitleViewNote">
@@ -37,11 +42,14 @@
     </style>
 
     <style name="EditNote">
-        <item name="android:paddingLeft">10dp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/stroke_night</item>
+        <item name="android:layout_margin">10dp</item>
     </style>
-<style name="Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
-    <item name="android:background">@color/places_autocomplete_fullscreen_background</item>
-    <item name="android:textColor">@color/purple_700</item>
-</style>
+
+    <style name="Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@color/places_autocomplete_fullscreen_background</item>
+        <item name="android:textColor">@color/purple_700</item>
+    </style>
 
 </resources>

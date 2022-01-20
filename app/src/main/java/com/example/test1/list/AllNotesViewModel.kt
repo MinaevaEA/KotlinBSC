@@ -1,15 +1,16 @@
 package com.example.test1.list
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+
+import androidx.lifecycle.*
+import com.example.test1.NoteInteractor
 import com.example.test1.SingleLiveEvent
 import com.example.test1.database.NoteData
 import com.example.test1.database.NoteDatabase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.collect
+import java.lang.Exception
+
 
 class AllNotesViewModel(
     private val database: NoteDatabase
@@ -17,6 +18,7 @@ class AllNotesViewModel(
     val notes = MutableLiveData<List<NoteData>>()
     val openNote = SingleLiveEvent<Pair<List<NoteData>, Int>>()
     val openAbout = SingleLiveEvent<Unit>()
+    val errorDownloadNote = SingleLiveEvent<Unit>()
 
     fun loadAllNotes() {
         viewModelScope.launch {
@@ -36,6 +38,23 @@ class AllNotesViewModel(
 
     fun createNote() {
         val newNote = NoteData(0, "", "")
+        addNote(newNote)
+    }
+
+    fun downloadNote() {
+        viewModelScope.launch {
+            try {
+                val noteData: NoteData = NoteInteractor().getNote()
+                val noteId: Long = 0
+                val newNote = noteData.copy(id = noteId)
+                addNote(newNote)
+            } catch (e: Exception) {
+                errorDownloadNote.postValue(Unit)
+            }
+        }
+    }
+
+    private fun addNote(newNote: NoteData) {
         val newNoteList = mutableListOf<NoteData>().apply {
             addAll(notes.value ?: listOf())
             add(newNote)
