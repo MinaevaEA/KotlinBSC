@@ -54,6 +54,22 @@ class AllNotesViewModel(
         }
     }
 
+    fun searchNotes(query: String?) {
+        if (query?.isEmpty() == false) {
+            notes.value?.filter {
+                it.run {
+                    title.contains(other = query, ignoreCase = true) ||
+                            text.contains(other = query, ignoreCase = true)
+                }
+            }
+                .also {
+                    notes.value = it
+                }
+        } else {
+            loadAllNotes()
+        }
+    }
+
     private fun addNote(newNote: NoteData) {
         val newNoteList = mutableListOf<NoteData>().apply {
             addAll(notes.value ?: listOf())
