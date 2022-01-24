@@ -57,11 +57,11 @@ class NoteFragment : Fragment() {
         (activity as? NotePagerActivity)?.currentFragment = this
     }
 
-    private fun onSaveSuccess(title: String, text: String) {
+    private fun onSaveSuccess(noteData: NoteData) {
         showNotification(R.string.save_msg)
         activity?.sendBroadcast(Intent().apply {
             action = ACTION
-            putExtra(NOTE_DATA, "${title}\n${text}")
+            putExtra(NOTE_DATA, "${noteData.title}\n${noteData.text}")
         })
     }
 
@@ -109,7 +109,7 @@ class NoteFragment : Fragment() {
             onNoteEmpty()
         }
         viewModel.saveSuccess.observe(requireActivity()) {
-            onSaveSuccess(it.title,it.text)
+            onSaveSuccess(it)
         }
 
     }

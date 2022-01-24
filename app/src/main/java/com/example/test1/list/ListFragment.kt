@@ -1,8 +1,9 @@
 package com.example.test1.list
 
-import android.app.SearchManager
+import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.SearchView.*
 import android.widget.Toast
@@ -11,12 +12,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
 import com.example.test1.*
 import com.example.test1.database.ConcreteNoteDatabase
 import com.example.test1.database.NoteData
 import com.example.test1.databinding.FragmentListBinding
 import com.example.test1.pager.NotePagerActivity
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 
 class ListFragment : Fragment() {
@@ -39,6 +43,7 @@ class ListFragment : Fragment() {
             AllNotesViewModelFactory(ConcreteNoteDatabase.getDatabase(requireContext()))
         viewModel = ViewModelProvider(this, viewModelFactory)[AllNotesViewModel::class.java]
         subscribeToViewModel()
+        initWorker()
 
         binding.about.setOnClickListener {
             viewModel.btnAboutActivityClick()
@@ -48,6 +53,7 @@ class ListFragment : Fragment() {
         }
         binding.buttonDownloadNote.setOnClickListener {
             viewModel.downloadNote()
+
         }
         binding.searchView.setOnQueryTextListener(object : OnQueryTextListener,
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
@@ -67,6 +73,17 @@ class ListFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         viewModel.loadAllNotes()
+    }
+
+    private fun initWorker() {
+        context?.also { checkedContext ->
+            WorkManager.getInstance(checkedContext)
+                .enqueue(
+                    PeriodicWorkRequest
+                        .Builder(BackupWorker::class.java, 2, TimeUnit.MINUTES)
+                        .build()
+                )
+        }
     }
 
     private fun showNoteList(notes: List<NoteData>) {
