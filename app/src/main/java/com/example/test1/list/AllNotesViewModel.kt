@@ -55,7 +55,8 @@ class AllNotesViewModel(
     }
 
     fun searchNotes(query: String?) {
-        if (query?.isEmpty() == false) {
+
+        if (query?.isNotEmpty() == true) {
             notes.value?.filter {
                 it.run {
                     title.contains(other = query, ignoreCase = true) ||
