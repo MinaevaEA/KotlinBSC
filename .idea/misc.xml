@@ -13,10 +13,14 @@
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/drawable/stope.xml" value="0.26197916666666665" />
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/activity_main.xml" value="0.21240942028985507" />
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/activity_mainview.xml" value="0.15" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/activity_search.xml" value="0.18177083333333333" />
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/activity_viewpager.xml" value="0.15" />
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_list.xml" value="0.264" />
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/fragment_note.xml" value="0.4" />
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/list_item.xml" value="0.4" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/seachble.xml" value="0.14947916666666666" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/layout/searchable1.xml" value="0.18177083333333333" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/Test1/app/src/main/res/menu/searchable.xml" value="0.14947916666666666" />
       </map>
     </option>
   </component>

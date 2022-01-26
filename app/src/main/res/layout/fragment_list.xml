@@ -34,11 +34,19 @@
         <ImageButton
             android:id="@+id/buttonDownloadNote"
             style="@style/ButtonGeneral.Button"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:ignore="ContentDescription"
-            app:srcCompat="@android:drawable/stat_notify_sdcard" />
+            app:srcCompat="@android:drawable/stat_notify_sdcard"
+            tools:ignore="ContentDescription" />
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent">
+        </androidx.appcompat.widget.SearchView>
+
     </androidx.appcompat.widget.Toolbar>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -46,4 +54,5 @@
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/list_item" />
+
 </LinearLayout>
