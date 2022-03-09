@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Rate"
+    android:layout_width="match_parent"
+    android:layout_height="105dp"
+    android:layout_gravity="center_horizontal"
+    android:padding="12dp">
+
+    <TextView
+        android:id="@+id/list_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        style="@style/rateTitle"
+        />
+
+    <TextView
+        android:id="@+id/list_price"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_horizontal"
-        android:padding="16dp"
-        xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <TextView
-            android:id="@+id/list_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:paddingLeft="16dp"
-            android:text="@string/title"
-            android:textStyle="bold"/>
-
-    <TextView
-            android:id="@+id/list_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
-            android:paddingLeft="16dp"
-            android:text="@string/price"/>
+        android:text="@string/price"
+        android:gravity="end"
+        android:layout_toEndOf="@id/list_title"
+        android:layout_alignBottom="@id/list_title"
+        style="@style/rateTitle.Price"
+        />
 
     <TextView
         android:id="@+id/list_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:paddingLeft="16dp"
-        android:text="@string/content"/>
+        android:layout_below="@id/list_title"
+        android:text="@string/content"
+        style="@style/rateTitle.Content"/>
 
-</LinearLayout>
+
+</RelativeLayout>

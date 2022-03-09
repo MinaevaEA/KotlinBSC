@@ -3,4 +3,8 @@
     <string name="title">Заголовок</string>
     <string name="price">Цена</string>
     <string name="content">Описание</string>
+    <string name="titleGeneral">Приложение платное</string>
+    <string name="titleContent">Выберите удобный для вас способ оплаты</string>
+    <string name="buttonText">Оформить подписку</string>
+    <string name="buttonRestore">Восстановить покупки</string>
 </resources>

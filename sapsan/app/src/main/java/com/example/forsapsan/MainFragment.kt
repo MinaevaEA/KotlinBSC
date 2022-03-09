@@ -38,11 +38,11 @@ class MainFragment : Fragment() {
         val adapter = ListAdapter(rate)
         recyclerFragment.adapter = adapter
         adapter.setOnClickListener(object : ListAdapter.OnItemClickListener {
+
             override fun onItemClick(position: Int) {
 
                 Toast.makeText(context, "ура $position", Toast.LENGTH_SHORT).show()
 
-               // recyclerFragment.setBackgroundColor(Color.BLUE)
             }
         })
     }

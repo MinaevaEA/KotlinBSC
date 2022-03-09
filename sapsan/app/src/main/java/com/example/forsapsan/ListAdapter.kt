@@ -1,8 +1,8 @@
 package com.example.forsapsan
 
 import android.graphics.Color
-import android.graphics.Typeface
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +13,6 @@ class ListAdapter(private val list: List<Rate>) : RecyclerView.Adapter<MyViewHol
 
     interface OnItemClickListener {
         fun onItemClick(position: Int) {
-
         }
     }
 
@@ -62,3 +61,4 @@ class MyViewHolder(
 
     }
 }
+
